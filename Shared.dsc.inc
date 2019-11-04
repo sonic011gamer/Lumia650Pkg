@@ -383,8 +383,8 @@
   # BDS
   MdeModulePkg/Universal/PrintDxe/PrintDxe.inf
   MdeModulePkg/Universal/Console/ConPlatformDxe/ConPlatformDxe.inf
-  MdeModulePkg/Universal/Console/ConSplitterDxe/ConSplitterDxe.inf
-  MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
+  Lumia930Pkg/Drivers/ConSplitterDxe/ConSplitterDxe.inf
+  Lumia930Pkg/Drivers/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/DevicePathDxe/DevicePathDxe.inf
   MdeModulePkg/Universal/HiiDatabaseDxe/HiiDatabaseDxe.inf
   MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
