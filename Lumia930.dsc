@@ -32,27 +32,27 @@
 
 
 [PcdsFixedAtBuild.common]
-  gArmTokenSpaceGuid.PcdSystemMemorySize|0x80000000         # 2GB
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x40000000         # 1GB
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x00000000
   gArmPlatformTokenSpaceGuid.PcdCoreCount|4
   gLumia930PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x7CD00000 #0FF00000
   gLumia930PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000
 
   # Default resolution for this firmware can be seen in dec file, override here for specific platform configuration if needed
-  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080
-  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920
-  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|1080
-  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|1920
+  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferWidth|540
+  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferHeight|960
+  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|540
+  #gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|960
 
 [PcdsDynamicDefault.common]
   #
   # Set video resolution for boot options and for text setup.
   # PlatformDxe can set the former at runtime.
   #
-  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution|1080
-  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution|1920
-  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoHorizontalResolution|1080
-  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoVerticalResolution|1920
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution|540
+  gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution|960
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoHorizontalResolution|540
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoVerticalResolution|960
   gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutRow|160
   gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutColumn|120
 
