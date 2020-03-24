@@ -37,14 +37,11 @@
 /* Mux source select values */
 #define cxo_source_val    0
 #define gpll0_source_val  1
-#define gpll4_source_val  5
 #define cxo_mm_source_val 0
 #define mmpll0_mm_source_val 1
 #define mmpll1_mm_source_val 2
 #define mmpll3_mm_source_val 3
 #define gpll0_mm_source_val 5
-#define edppll_270_mm_source_val 4
-#define edppll_350_mm_source_val 4
 
 struct clk_freq_tbl rcg_dummy_freq = F_END;
 
@@ -114,50 +111,11 @@ static struct pll_vote_clk gpll0_clk_src =
 	},
 };
 
-/*
-static struct pll_vote_clk gpll4_clk_src =
-{
-	.en_reg       = (void *) APCS_GPLL_ENA_VOTE,
-	.en_mask      = BIT(4),
-	.status_reg   = (void *) GPLL4_STATUS,
-	.status_mask  = BIT(17),
-	.parent       = &cxo_clk_src.c,
-
-	.c = {
-		.rate     = 768000000,
-		.dbg_name = "gpll4_clk_src",
-		.ops      = &clk_ops_pll_vote,
-	},
-};
-*/
-
 /* SDCC Clocks */
-/* This table is for sdc1 apps clk only for MSM8974 PRO AC */
-/* Because is for MSM8974AC and we are not using that and the 
-   configuration will treat all warnings as errors so comment
-   them out
-static struct clk_freq_tbl ftbl_gcc_sdcc1_apps_clk_ac[] =
+static struct clk_freq_tbl ftbl_gcc_sdcc1_2_apps_clk[] =
 {
-	F(   144000,    cxo,  16,   3,  25),
-	F(   400000,    cxo,  12,   1,   4),
-	F( 20000000,  gpll0,  15,   1,   2),
-	F( 25000000,  gpll0,  12,   1,   2),
-	F( 50000000,  gpll0,  12,   0,   0),
-	F(100000000,  gpll0,   6,   0,   0),
-	F(192000000,  gpll4,   4,   0,   0),
-	F(384000000,  gpll4,   2,   0,   0),
-	F_END
-};
-*/
-
-/* This table is for
- * sdc[1-4] for all MSM8974 excluding MSM8974PROAC
- * sdc[2-4] for MSM8974PRO AC
- */
-static struct clk_freq_tbl ftbl_gcc_sdcc1_4_apps_clk[] =
-{
-	F(   144000,    cxo,  16,   3,  25),
-	F(   400000,    cxo,  12,   1,   4),
+	F(   144000,    cxo,   16,   3,  25),
+	F(   400000,    cxo,   12,   1,   4),
 	F( 20000000,  gpll0,  15,   1,   2),
 	F( 25000000,  gpll0,  12,   1,   2),
 	F( 50000000,  gpll0,  12,   0,   0),
@@ -175,7 +133,7 @@ static struct rcg_clk sdcc1_apps_clk_src =
 	.d_reg        = (uint32_t *) SDCC1_D,
 
 	.set_rate     = clock_lib2_rcg_set_rate_mnd,
-	.freq_tbl     = ftbl_gcc_sdcc1_4_apps_clk,
+	.freq_tbl     = ftbl_gcc_sdcc1_2_apps_clk,
 	.current_freq = &rcg_dummy_freq,
 
 	.c = {
@@ -206,27 +164,7 @@ static struct branch_clk gcc_sdcc1_ahb_clk =
 	},
 };
 
-static struct branch_clk gcc_sdcc1_cdccal_sleep_clk =
-{
-	.cbcr_reg = (uint32_t *) SDCC1_CDCCAL_SLEEP_CBCR,
-	.has_sibling = 1,
-
-	.c = {
-		.dbg_name = "gcc_sdcc1_cdccal_sleep_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk gcc_sdcc1_cdccal_ff_clk =
-{
-	.cbcr_reg = (uint32_t *) SDCC1_CDCCAL_FF_CBCR,
-	.has_sibling = 1,
-
-	.c = {
-		.dbg_name = "gcc_sdcc1_cdccal_ff_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
+/* SDCC2 clocks */
 
 static struct rcg_clk sdcc2_apps_clk_src =
 {
@@ -237,7 +175,7 @@ static struct rcg_clk sdcc2_apps_clk_src =
 	.d_reg        = (uint32_t *) SDCC2_D,
 
 	.set_rate     = clock_lib2_rcg_set_rate_mnd,
-	.freq_tbl     = ftbl_gcc_sdcc1_4_apps_clk,
+	.freq_tbl     = ftbl_gcc_sdcc1_2_apps_clk,
 	.current_freq = &rcg_dummy_freq,
 
 	.c = {
@@ -288,7 +226,7 @@ static struct clk_freq_tbl ftbl_gcc_blsp1_2_uart1_6_apps_clk[] =
 	F_END
 };
 
-/* defined but not used
+
 static struct rcg_clk blsp1_uart2_apps_clk_src =
 {
 	.cmd_reg      = (uint32_t *) BLSP1_UART2_APPS_CMD_RCGR,
@@ -325,48 +263,6 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
 
 	.c = {
 		.dbg_name = "gcc_blsp1_ahb_clk",
-		.ops      = &clk_ops_vote,
-	},
-};
-*/
-
-/* BLSP 2 */
-static struct rcg_clk blsp2_uart6_apps_clk_src =
-{
-      .cmd_reg      = (uint32_t *) BLSP2_UART6_APPS_CMD_RCGR,
-      .cfg_reg      = (uint32_t *) BLSP2_UART6_APPS_CFG_RCGR,
-      .m_reg        = (uint32_t *) BLSP2_UART6_APPS_M,
-      .n_reg        = (uint32_t *) BLSP2_UART6_APPS_N,
-      .d_reg        = (uint32_t *) BLSP2_UART6_APPS_D,
-
-      .set_rate     = clock_lib2_rcg_set_rate_mnd,
-      .freq_tbl     = ftbl_gcc_blsp1_2_uart1_6_apps_clk,
-      .current_freq = &rcg_dummy_freq,
-
-      .c = {
-              .dbg_name = "blsp2_uart6_apps_clk",
-              .ops      = &clk_ops_rcg_mnd,
-      },
-};
-
-static struct branch_clk gcc_blsp2_uart6_apps_clk =
-{
-      .cbcr_reg     = (uint32_t *) BLSP2_UART6_APPS_CBCR,
-      .parent       = &blsp2_uart6_apps_clk_src.c,
-
-      .c = {
-              .dbg_name = "gcc_blsp2_uart6_apps_clk",
-              .ops      = &clk_ops_branch,
-      },
-};
-
-static struct vote_clk gcc_blsp2_ahb_clk = {
-	.cbcr_reg     = (uint32_t *) BLSP2_AHB_CBCR,
-	.vote_reg     = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask      = BIT(15),
-
-	.c = {
-		.dbg_name = "gcc_blsp2_ahb_clk",
 		.ops      = &clk_ops_vote,
 	},
 };
@@ -415,56 +311,141 @@ static struct branch_clk gcc_usb_hs_ahb_clk =
 	},
 };
 
-/* CE Clocks */
-static struct clk_freq_tbl ftbl_gcc_ce2_clk[] = {
-	F( 50000000,  gpll0,  12,   0,   0),
-	F(100000000,  gpll0,   6,   0,   0),
+/* Diplay related clock LUT */
+static struct clk_freq_tbl ftbl_mmss_axi_clk[] = {
+	F_MM(19200000,     cxo,     1,   0,   0),
+	F_MM(100000000,  gpll0,     6,   0,   0),
+	F_MM(200000000,  gpll0,     3,   0,   0),
 	F_END
 };
 
-static struct rcg_clk ce2_clk_src = {
-	.cmd_reg      = (uint32_t *) GCC_CE2_CMD_RCGR,
-	.cfg_reg      = (uint32_t *) GCC_CE2_CFG_RCGR,
-	.set_rate     = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl     = ftbl_gcc_ce2_clk,
-	.current_freq = &rcg_dummy_freq,
+static struct clk_freq_tbl ftbl_mdss_vsync_clk[] = {
+	F_MM(19200000,    cxo,   1,   0,   0),
+	F_END
+};
 
-	.c = {
-		.dbg_name = "ce2_clk_src",
+static struct rcg_clk vsync_clk_src = {
+	.cmd_reg  = (uint32_t *) VSYNC_CMD_RCGR,
+	.cfg_reg  = (uint32_t *) VSYNC_CFG_RCGR,
+	.set_rate = clock_lib2_rcg_set_rate_hid,
+	.freq_tbl = ftbl_mdss_vsync_clk,
+	.c        = {
+		.dbg_name = "vsync_clk_src",
 		.ops      = &clk_ops_rcg,
 	},
 };
 
-static struct vote_clk gcc_ce2_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE2_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(2),
-
-	.c = {
-		.dbg_name = "gcc_ce2_clk",
-		.ops = &clk_ops_vote,
+static struct rcg_clk axi_clk_src = {
+	.cmd_reg  = (uint32_t *) AXI_CMD_RCGR,
+	.cfg_reg  = (uint32_t *) AXI_CFG_RCGR,
+	.set_rate = clock_lib2_rcg_set_rate_hid,
+	.freq_tbl = ftbl_mmss_axi_clk,
+	.c        = {
+		.dbg_name = "axi_clk_src",
+		.ops      = &clk_ops_rcg,
 	},
 };
 
-static struct vote_clk gcc_ce2_ahb_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE2_AHB_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(0),
-
-	.c = {
-		.dbg_name = "gcc_ce2_ahb_clk",
-		.ops = &clk_ops_vote,
+static struct branch_clk mdp_ahb_clk = {
+	.cbcr_reg    = (uint32_t *) MDP_AHB_CBCR,
+	.has_sibling = 1,
+	.c           = {
+		.dbg_name = "mdp_ahb_clk",
+		.ops      = &clk_ops_branch,
 	},
 };
 
-static struct vote_clk gcc_ce2_axi_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE2_AXI_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(1),
+static struct branch_clk mdp_axi_clk = {
+	.cbcr_reg    = (uint32_t *) MDP_AXI_CBCR,
+	.parent      = &axi_clk_src.c,
+	.c           = {
+		.dbg_name = "mdp_axi_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
 
+static struct branch_clk mdp_dsi_clk = {
+	.cbcr_reg    = (uint32_t *) MDP_DSI_CBCR,
+	.c           = {
+		.dbg_name = "mdp_dsi_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk mmss_mmssnoc_axi_clk = {
+	.cbcr_reg    = (uint32_t *) MMSS_MMSSNOC_AXI_CBCR,
+	.parent      = &axi_clk_src.c,
+	.c           = {
+		.dbg_name = "mmss_mmssnoc_axi_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk mmss_s0_axi_clk = {
+	.cbcr_reg    = (uint32_t *) MMSS_S0_AXI_CBCR,
+	.parent      = &axi_clk_src.c,
+	.c           = {
+		.dbg_name = "mmss_s0_axi_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk mdp_vsync_clk = {
+	.cbcr_reg    = (uint32_t *) MDP_VSYNC_CBCR,
+	.parent      = &vsync_clk_src.c,
+	.c           = {
+		.dbg_name = "mdp_vsync_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk mdp_lcdc_clk = {
+	.cbcr_reg    = (uint32_t *) MDP_LCDC_CBCR,
+	.parent      = &axi_clk_src.c,
+	.c           = {
+		.dbg_name = "mdp_lcdc_clk",
+		.ops      = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk dsi_clk = {
+	.cbcr_reg = (uint32_t *) DSI_CBCR,
 	.c = {
-		.dbg_name = "gcc_ce2_axi_clk",
-		.ops = &clk_ops_vote,
+		.dbg_name = "dsi_clk",
+		.ops = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk dsi_ahb_clk = {
+	.cbcr_reg = (uint32_t *) DSI_AHB_CBCR,
+	.has_sibling = 1,
+	.c = {
+		.dbg_name = "dsi_ahb_clk",
+		.ops = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk dsi_byte_clk = {
+	.cbcr_reg = (uint32_t *) DSI_BYTE_CBCR,
+	.c = {
+		.dbg_name = "dsi_byte_clk",
+		.ops = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk dsi_esc_clk = {
+	.cbcr_reg = (uint32_t *) DSI_ESC_CBCR,
+	.c = {
+		.dbg_name = "dsi_esc_clk",
+		.ops = &clk_ops_branch,
+	},
+};
+
+static struct branch_clk dsi_pclk_clk = {
+	.cbcr_reg = (uint32_t *) DSI_PCLK_CBCR,
+	.c = {
+		.dbg_name = "dsi_pclk_clk",
+		.ops = &clk_ops_branch,
 	},
 };
 
@@ -488,362 +469,35 @@ static struct rcg_clk ce1_clk_src = {
 };
 
 static struct vote_clk gcc_ce1_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE1_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(5),
+	.cbcr_reg      = (uint32_t *) GCC_CE1_CBCR,
+	.vote_reg      = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
+	.en_mask       = BIT(5),
 
 	.c = {
-		.dbg_name = "gcc_ce1_clk",
-		.ops = &clk_ops_vote,
+		.dbg_name  = "gcc_ce1_clk",
+		.ops       = &clk_ops_vote,
 	},
 };
 
 static struct vote_clk gcc_ce1_ahb_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE1_AHB_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(3),
+	.cbcr_reg     = (uint32_t *) GCC_CE1_AHB_CBCR,
+	.vote_reg     = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
+	.en_mask      = BIT(3),
 
 	.c = {
 		.dbg_name = "gcc_ce1_ahb_clk",
-		.ops = &clk_ops_vote,
+		.ops      = &clk_ops_vote,
 	},
 };
 
 static struct vote_clk gcc_ce1_axi_clk = {
-	.cbcr_reg = (uint32_t *) GCC_CE1_AXI_CBCR,
-	.vote_reg = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
-	.en_mask = BIT(4),
+	.cbcr_reg     = (uint32_t *) GCC_CE1_AXI_CBCR,
+	.vote_reg     = (uint32_t *) APCS_CLOCK_BRANCH_ENA_VOTE,
+	.en_mask      = BIT(4),
 
 	.c = {
 		.dbg_name = "gcc_ce1_axi_clk",
-		.ops = &clk_ops_vote,
-	},
-};
-
-
-struct branch_clk gcc_blsp2_qup5_i2c_apps_clk = {
-	.cbcr_reg = (uint32_t *) BLSP2_QUP5_I2C_APPS_CBCR,
-	.parent   = &cxo_clk_src.c,
-
-	.c = {
-		.dbg_name = "gcc_blsp2_qup5_i2c_apps_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-/* Display clocks */
-static struct clk_freq_tbl ftbl_mdss_esc0_1_clk[] = {
-	F_MM(19200000,    cxo,   1,   0,   0),
-	F_END
-};
-
-static struct clk_freq_tbl ftbl_mdss_esc1_1_clk[] = {
-	F_MM(19200000,    cxo,   1,   0,   0),
-	F_END
-};
-
-static struct clk_freq_tbl ftbl_mmss_axi_clk[] = {
-	F_MM(19200000,     cxo,     1,   0,   0),
-	F_MM(100000000,  gpll0,     6,   0,   0),
-	F_END
-};
-
-static struct clk_freq_tbl ftbl_mdp_clk[] = {
-	F_MM( 75000000,  gpll0,   8,   0,   0),
-	F_MM( 240000000,  gpll0,   2.5,   0,   0),
-	F_END
-};
-
-static struct rcg_clk dsi_esc0_clk_src = {
-	.cmd_reg  = (uint32_t *) DSI_ESC0_CMD_RCGR,
-	.cfg_reg  = (uint32_t *) DSI_ESC0_CFG_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mdss_esc0_1_clk,
-
-	.c        = {
-		.dbg_name = "dsi_esc0_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct rcg_clk dsi_esc1_clk_src = {
-	.cmd_reg  = (uint32_t *) DSI_ESC1_CMD_RCGR,
-	.cfg_reg  = (uint32_t *) DSI_ESC1_CFG_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mdss_esc1_1_clk,
-
-	.c        = {
-		.dbg_name = "dsi_esc1_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct clk_freq_tbl ftbl_mdss_vsync_clk[] = {
-	F_MM(19200000,    cxo,   1,   0,   0),
-	F_END
-};
-
-static struct rcg_clk vsync_clk_src = {
-	.cmd_reg  = (uint32_t *) VSYNC_CMD_RCGR,
-	.cfg_reg  = (uint32_t *) VSYNC_CFG_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mdss_vsync_clk,
-
-	.c        = {
-		.dbg_name = "vsync_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct rcg_clk mdp_axi_clk_src = {
-	.cmd_reg  = (uint32_t *) MDP_AXI_CMD_RCGR,
-	.cfg_reg  = (uint32_t *) MDP_AXI_CFG_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mmss_axi_clk,
-
-	.c        = {
-		.dbg_name = "mdp_axi_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct branch_clk mdss_esc0_clk = {
-	.cbcr_reg    = (uint32_t *) DSI_ESC0_CBCR,
-	.parent      = &dsi_esc0_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mdss_esc0_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdss_esc1_clk = {
-	.cbcr_reg    = (uint32_t *) DSI_ESC1_CBCR,
-	.parent      = &dsi_esc1_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mdss_esc1_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdss_axi_clk = {
-	.cbcr_reg    = (uint32_t *) MDP_AXI_CBCR,
-	.parent      = &mdp_axi_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mdss_axi_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mmss_mmssnoc_axi_clk = {
-	.cbcr_reg    = (uint32_t *) MMSS_MMSSNOC_AXI_CBCR,
-	.parent      = &mdp_axi_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mmss_mmssnoc_axi_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mmss_s0_axi_clk = {
-	.cbcr_reg    = (uint32_t *) MMSS_S0_AXI_CBCR,
-	.parent      = &mdp_axi_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mmss_s0_axi_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdp_ahb_clk = {
-	.cbcr_reg    = (uint32_t *) MDP_AHB_CBCR,
-	.has_sibling = 1,
-
-	.c           = {
-		.dbg_name = "mdp_ahb_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct rcg_clk mdss_mdp_clk_src = {
-	.cmd_reg      = (uint32_t *) MDP_CMD_RCGR,
-	.cfg_reg      = (uint32_t *) MDP_CFG_RCGR,
-	.set_rate     = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl     = ftbl_mdp_clk,
-	.current_freq = &rcg_dummy_freq,
-
-	.c            = {
-		.dbg_name = "mdss_mdp_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct branch_clk mdss_mdp_clk = {
-	.cbcr_reg    = (uint32_t *) MDP_CBCR,
-	.parent      = &mdss_mdp_clk_src.c,
-	.has_sibling = 1,
-
-	.c           = {
-		.dbg_name = "mdss_mdp_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdss_mdp_lut_clk = {
-	.cbcr_reg    = (uint32_t *) MDP_LUT_CBCR,
-	.parent      = &mdss_mdp_clk_src.c,
-	.has_sibling = 1,
-
-	.c           = {
-		.dbg_name = "mdss_mdp_lut_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdss_vsync_clk = {
-	.cbcr_reg    = (uint32_t *) MDSS_VSYNC_CBCR,
-	.parent      = &vsync_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mdss_vsync_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct clk_freq_tbl ftbl_mdss_edpaux_clk[] = {
-	F_MM(19200000,    cxo,   1,   0,   0),
-	F_END
-};
-
-static struct rcg_clk edpaux_clk_src = {
-	.cmd_reg  = (uint32_t *) EDPAUX_CMD_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mdss_edpaux_clk,
-
-	.c        = {
-		.dbg_name = "edpaux_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-static struct branch_clk mdss_edpaux_clk = {
-	.cbcr_reg    =(uint32_t *) MDSS_EDPAUX_CBCR,
-	.parent      = &edpaux_clk_src.c,
-	.has_sibling = 0,
-
-	.c           = {
-		.dbg_name = "mdss_edpaux_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct clk_freq_tbl ftbl_mdss_edplink_clk[] = {
-	F_MDSS(162000000, edppll_270,   2,   0,   0),
-	F_MDSS(270000000, edppll_270,  11,   0,   0),
-	F_END
-};
-
-static struct rcg_clk edplink_clk_src = {
-	.cmd_reg = (uint32_t *) EDPLINK_CMD_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_hid,
-	.freq_tbl = ftbl_mdss_edplink_clk,
-	.current_freq = &rcg_dummy_freq,
-	.c = {
-		.dbg_name = "edplink_clk_src",
-		.ops = &clk_ops_rcg,
-	},
-};
-
-static struct clk_freq_tbl ftbl_mdss_edppixel_clk[] = {
-	F_MDSS(138500000, edppll_350,   2,   0,   0),
-	F_MDSS(350000000, edppll_350,  11,   0,   0),
-	F_END
-};
-
-static struct rcg_clk edppixel_clk_src = {
-	.cmd_reg = (uint32_t *)EDPPIXEL_CMD_RCGR,
-	.set_rate = clock_lib2_rcg_set_rate_mnd,
-	.freq_tbl = ftbl_mdss_edppixel_clk,
-	.current_freq = &rcg_dummy_freq,
-	.c = {
-		.dbg_name = "edppixel_clk_src",
-		.ops = &clk_ops_rcg_mnd,
-	},
-};
-
-static struct branch_clk mdss_edplink_clk = {
-	.cbcr_reg = (uint32_t *)MDSS_EDPLINK_CBCR,
-	.has_sibling = 0,
-	.parent = &edplink_clk_src.c,
-	.c = {
-		.dbg_name = "mdss_edplink_clk",
-		.ops = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk mdss_edppixel_clk = {
-	.cbcr_reg = (uint32_t *)MDSS_EDPPIXEL_CBCR,
-	.has_sibling = 0,
-	.parent = &edppixel_clk_src.c,
-	.c = {
-		.dbg_name = "mdss_edppixel_clk",
-		.ops = &clk_ops_branch,
-	},
-};
-
-/* USB 3.0 Clocks */
-static struct clk_freq_tbl ftbl_gcc_usb30_master_clk[] =
-{
-	F(125000000, gpll0, 1, 5, 24),
-	F_END
-};
-
-static struct rcg_clk usb30_master_clk_src =
-{
-	.cmd_reg      = (uint32_t *) GCC_USB30_MASTER_CMD_RCGR,
-	.cfg_reg      = (uint32_t *) GCC_USB30_MASTER_CFG_RCGR,
-	.m_reg        = (uint32_t *) GCC_USB30_MASTER_M,
-	.n_reg        = (uint32_t *) GCC_USB30_MASTER_N,
-	.d_reg        = (uint32_t *) GCC_USB30_MASTER_D,
-
-	.set_rate     = clock_lib2_rcg_set_rate_mnd,
-	.freq_tbl     = ftbl_gcc_usb30_master_clk,
-	.current_freq = &rcg_dummy_freq,
-
-	.c = {
-		.dbg_name = "usb30_master_clk_src",
-		.ops      = &clk_ops_rcg,
-	},
-};
-
-
-static struct branch_clk gcc_usb30_master_clk =
-{
-	.cbcr_reg     = (uint32_t *) GCC_USB30_MASTER_CBCR,
-	.parent       = &usb30_master_clk_src.c,
-
-	.c = {
-		.dbg_name = "gcc_usb30_master_clk",
-		.ops      = &clk_ops_branch,
-	},
-};
-
-static struct branch_clk gcc_sys_noc_usb30_axi_clk =
-{
-	.cbcr_reg     = (uint32_t *) SYS_NOC_USB3_AXI_CBCR,
-	.has_sibling  = 1,
-
-	.c = {
-		.dbg_name = "gcc_sys_noc_usb3_axi_clk",
-		.ops      = &clk_ops_branch,
+		.ops      = &clk_ops_vote,
 	},
 };
 
@@ -853,50 +507,34 @@ static struct clk_lookup msm_clocks_8974[] =
 	CLK_LOOKUP("sdc1_iface_clk", gcc_sdcc1_ahb_clk.c),
 	CLK_LOOKUP("sdc1_core_clk",  gcc_sdcc1_apps_clk.c),
 
-	CLK_LOOKUP("gcc_sdcc1_cdccal_sleep_clk", gcc_sdcc1_cdccal_sleep_clk.c),
-	CLK_LOOKUP("gcc_sdcc1_cdccal_ff_clk",    gcc_sdcc1_cdccal_ff_clk.c),
-
 	CLK_LOOKUP("sdc2_iface_clk", gcc_sdcc2_ahb_clk.c),
 	CLK_LOOKUP("sdc2_core_clk",  gcc_sdcc2_apps_clk.c),
 
-	CLK_LOOKUP("uart12_iface_clk", gcc_blsp2_ahb_clk.c),
-	CLK_LOOKUP("uart12_core_clk",  gcc_blsp2_uart6_apps_clk.c),
+	CLK_LOOKUP("uart2_iface_clk", gcc_blsp1_ahb_clk.c),
+	CLK_LOOKUP("uart2_core_clk",  gcc_blsp1_uart2_apps_clk.c),
 
 	CLK_LOOKUP("usb_iface_clk",  gcc_usb_hs_ahb_clk.c),
 	CLK_LOOKUP("usb_core_clk",   gcc_usb_hs_system_clk.c),
 
-	CLK_LOOKUP("ce2_ahb_clk",  gcc_ce2_ahb_clk.c),
-	CLK_LOOKUP("ce2_axi_clk",  gcc_ce2_axi_clk.c),
-	CLK_LOOKUP("ce2_core_clk", gcc_ce2_clk.c),
-	CLK_LOOKUP("ce2_src_clk",  ce2_clk_src.c),
+	CLK_LOOKUP("axi_clk_src",          axi_clk_src.c),
+	CLK_LOOKUP("mmss_mmssnoc_axi_clk", mmss_mmssnoc_axi_clk.c),
+	CLK_LOOKUP("mmss_s0_axi_clk",      mmss_s0_axi_clk.c),
+	CLK_LOOKUP("mdp_axi_clk",          mdp_axi_clk.c),
+	CLK_LOOKUP("mdp_dsi_clk",          mdp_dsi_clk.c),
+	CLK_LOOKUP("mdp_vsync_clk",        mdp_vsync_clk.c),
+	CLK_LOOKUP("mdp_lcdc_clk",         mdp_lcdc_clk.c),
+	CLK_LOOKUP("mdp_ahb_clk",          mdp_ahb_clk.c),
+
+	CLK_LOOKUP("dsi_clk",              dsi_clk.c),
+	CLK_LOOKUP("dsi_ahb_clk",          dsi_ahb_clk.c),
+	CLK_LOOKUP("dsi_byte_clk",         dsi_byte_clk.c),
+	CLK_LOOKUP("dsi_esc_clk",          dsi_esc_clk.c),
+	CLK_LOOKUP("dsi_pclk_clk",         dsi_pclk_clk.c),
 
 	CLK_LOOKUP("ce1_ahb_clk",  gcc_ce1_ahb_clk.c),
 	CLK_LOOKUP("ce1_axi_clk",  gcc_ce1_axi_clk.c),
 	CLK_LOOKUP("ce1_core_clk", gcc_ce1_clk.c),
 	CLK_LOOKUP("ce1_src_clk",  ce1_clk_src.c),
-
-
-	CLK_LOOKUP("blsp2_ahb_clk",           gcc_blsp2_ahb_clk.c),
-	CLK_LOOKUP("blsp2_qup5_i2c_apps_clk", gcc_blsp2_qup5_i2c_apps_clk.c),
-
-	CLK_LOOKUP("mdp_ahb_clk",          mdp_ahb_clk.c),
-	CLK_LOOKUP("mdss_esc0_clk",        mdss_esc0_clk.c),
-	CLK_LOOKUP("mdss_esc1_clk",        mdss_esc1_clk.c),
-	CLK_LOOKUP("mdss_axi_clk",         mdss_axi_clk.c),
-	CLK_LOOKUP("mmss_mmssnoc_axi_clk", mmss_mmssnoc_axi_clk.c),
-	CLK_LOOKUP("mmss_s0_axi_clk",      mmss_s0_axi_clk.c),
-	CLK_LOOKUP("mdss_vsync_clk",       mdss_vsync_clk.c),
-	CLK_LOOKUP("mdss_mdp_clk_src",     mdss_mdp_clk_src.c),
-	CLK_LOOKUP("mdss_mdp_clk",         mdss_mdp_clk.c),
-	CLK_LOOKUP("mdss_mdp_lut_clk",     mdss_mdp_lut_clk.c),
-
-	CLK_LOOKUP("edp_pixel_clk",        mdss_edppixel_clk.c),
-	CLK_LOOKUP("edp_link_clk",         mdss_edplink_clk.c),
-	CLK_LOOKUP("edp_aux_clk",          mdss_edpaux_clk.c),
-
-	/* USB 3.0 */
-	CLK_LOOKUP("usb30_iface_clk",  gcc_sys_noc_usb30_axi_clk.c),
-	CLK_LOOKUP("usb30_master_clk", gcc_usb30_master_clk.c),
 };
 
 RETURN_STATUS
@@ -912,4 +550,3 @@ LibQcomPlatformClockInit (
 
 	return RETURN_SUCCESS;
 }
-
