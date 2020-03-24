@@ -1,17 +1,17 @@
-/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
-
+/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following
- *     disclaimer in the documentation and/or other materials provided
- *     with the distribution.
- *   * Neither the name of The Linux Foundation, Inc. nor the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above
+ *       copyright notice, this list of conditions and the following
+ *       disclaimer in the documentation and/or other materials provided
+ *       with the distribution.
+ *     * Neither the name of The Linux Foundation nor the names of its
+ *       contributors may be used to endorse or promote products derived
+ *       from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
  * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
@@ -26,9 +26,8 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#ifndef __IRQS_COPPER_H
-#define __IRQS_COPPER_H
+#ifndef __IRQS_MSM8610_H
+#define __IRQS_MSM8610_H
 
 /* MSM ACPU Interrupt Numbers */
 
@@ -45,11 +44,11 @@
 
 #define INT_QTMR_FRM_0_PHYSICAL_TIMER_EXP      (GIC_SPI_START + 8)
 
-#define USB30_EE1_IRQ                          (GIC_SPI_START + 131)
 #define USB1_HS_BAM_IRQ                        (GIC_SPI_START + 135)
 #define USB1_HS_IRQ                            (GIC_SPI_START + 134)
-#define USB2_IRQ                               (GIC_SPI_START + 141)
-#define USB1_IRQ                               (GIC_SPI_START + 142)
+
+#define SDCC1_PWRCTL_IRQ                       (GIC_SPI_START + 138)
+#define SDCC2_PWRCTL_IRQ                       (GIC_SPI_START + 221)
 
 /* Retrofit universal macro names */
 #define INT_USB_HS                             USB1_HS_IRQ
@@ -62,14 +61,4 @@
 
 #define NR_IRQS                                (NR_MSM_IRQS + NR_GPIO_IRQS + \
                                                NR_BOARD_IRQS)
-
-#define BLSP_QUP_IRQ(blsp_id, qup_id)          ((blsp_id == 1) ? \
-                                               ((GIC_SPI_START + 95) + qup_id):\
-                                               ((GIC_SPI_START + 101) + qup_id))
-
-#define SDCC1_PWRCTL_IRQ                       (GIC_SPI_START + 138)
-#define SDCC2_PWRCTL_IRQ                       (GIC_SPI_START + 221)
-#define SDCC3_PWRCTL_IRQ                       (GIC_SPI_START + 224)
-#define SDCC4_PWRCTL_IRQ                       (GIC_SPI_START + 227)
-#endif	/* __IRQS_COPPER_H */
- 
+#endif	/* __IRQS_MSM8610_H */
