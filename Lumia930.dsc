@@ -35,7 +35,7 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x40000000         # 1GB
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x00000000
   gArmPlatformTokenSpaceGuid.PcdCoreCount|4
-  gLumia930PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x7CD00000 #0FF00000
+  gLumia930PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x3CC00000 #0FF00000
   gLumia930PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000
 
   # Default resolution for this firmware can be seen in dec file, override here for specific platform configuration if needed
