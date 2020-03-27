@@ -409,15 +409,15 @@
   MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
 
   # Networking
-#   NetworkPkg/DpcDxe/DpcDxe.inf
-#   NetworkPkg/ArpDxe/ArpDxe.inf
-#   NetworkPkg/Dhcp4Dxe/Dhcp4Dxe.inf
-#   NetworkPkg/Ip4Dxe/Ip4Dxe.inf
-#   NetworkPkg/MnpDxe/MnpDxe.inf
-#   NetworkPkg/VlanConfigDxe/VlanConfigDxe.inf
-#   NetworkPkg/Mtftp4Dxe/Mtftp4Dxe.inf
-#   NetworkPkg/TcpDxe/TcpDxe.inf
-#   NetworkPkg/Udp4Dxe/Udp4Dxe.inf
+  NetworkPkg/DpcDxe/DpcDxe.inf
+  NetworkPkg/ArpDxe/ArpDxe.inf
+  NetworkPkg/Dhcp4Dxe/Dhcp4Dxe.inf
+  NetworkPkg/Ip4Dxe/Ip4Dxe.inf
+  NetworkPkg/MnpDxe/MnpDxe.inf
+  NetworkPkg/VlanConfigDxe/VlanConfigDxe.inf
+  NetworkPkg/Mtftp4Dxe/Mtftp4Dxe.inf
+  NetworkPkg/TcpDxe/TcpDxe.inf
+  NetworkPkg/Udp4Dxe/Udp4Dxe.inf
   
   # ACPI AND SMBIOS
   Lumia930Pkg/Driver/SmBiosTableDxe/SmBiosTableDxe.inf
