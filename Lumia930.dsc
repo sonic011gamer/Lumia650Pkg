@@ -53,14 +53,14 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution|960
   gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoHorizontalResolution|540
   gEfiMdeModulePkgTokenSpaceGuid.PcdSetupVideoVerticalResolution|960
-  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutRow|160
-  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutColumn|120
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutRow|120
+  gEfiMdeModulePkgTokenSpaceGuid.PcdSetupConOutColumn|50
 
   [PcdsPatchableInModule]
    # Console Resolution
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoHorizontalResolution|540
   gEfiMdeModulePkgTokenSpaceGuid.PcdVideoVerticalResolution|960
-  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn|40
-  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow|12
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutColumn|50
+  gEfiMdeModulePkgTokenSpaceGuid.PcdConOutRow|120
 
 !include Lumia930Pkg/Shared.dsc.inc
