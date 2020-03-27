@@ -100,16 +100,16 @@ READ_LOCK_STATUS   = TRUE
   INF MdeModulePkg/Bus/Scsi/ScsiBusDxe/ScsiBusDxe.inf
   INF MdeModulePkg/Bus/Scsi/ScsiDiskDxe/ScsiDiskDxe.inf
 
-  # Networking
-  INF NetworkPkg/DpcDxe/DpcDxe.inf
-  INF NetworkPkg/ArpDxe/ArpDxe.inf
-  INF NetworkPkg/Dhcp4Dxe/Dhcp4Dxe.inf
-  INF NetworkPkg/Ip4Dxe/Ip4Dxe.inf
-  INF NetworkPkg/MnpDxe/MnpDxe.inf
-  INF NetworkPkg/VlanConfigDxe/VlanConfigDxe.inf
-  INF NetworkPkg/Mtftp4Dxe/Mtftp4Dxe.inf
-  INF NetworkPkg/TcpDxe/TcpDxe.inf
-  INF NetworkPkg/Udp4Dxe/Udp4Dxe.inf
+  # # Networking
+  # INF NetworkPkg/DpcDxe/DpcDxe.inf
+  # INF NetworkPkg/ArpDxe/ArpDxe.inf
+  # INF NetworkPkg/Dhcp4Dxe/Dhcp4Dxe.inf
+  # INF NetworkPkg/Ip4Dxe/Ip4Dxe.inf
+  # INF NetworkPkg/MnpDxe/MnpDxe.inf
+  # INF NetworkPkg/VlanConfigDxe/VlanConfigDxe.inf
+  # INF NetworkPkg/Mtftp4Dxe/Mtftp4Dxe.inf
+  # INF NetworkPkg/TcpDxe/TcpDxe.inf
+  # INF NetworkPkg/Udp4Dxe/Udp4Dxe.inf
 
   #ACPI and SMBIOS
   INF Lumia930Pkg/Driver/SmBiosTableDxe/SmBiosTableDxe.inf
