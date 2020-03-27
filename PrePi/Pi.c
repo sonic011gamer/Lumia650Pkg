@@ -132,6 +132,11 @@ Main
     DEBUG((EFI_D_INFO | EFI_D_LOAD, "GIC configured\n"));
 
 
+  // Create the Stacks HOB (reserve the memory for all stacks)	
+
+  BuildStackHob ((UINTN)StackBase, StackSize);
+  
+  //TODO: Call CpuPei as a library
   BuildCpuHob (ArmGetPhysicalAddressBits (), PcdGet8 (PcdPrePiCpuIoSize));
   // Store timer value logged at the beginning of firmware image execution
   //Performance.ResetEnd = GetTimeInNanoSecond (StartTimeStamp);

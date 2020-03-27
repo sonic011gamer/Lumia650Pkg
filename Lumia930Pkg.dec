@@ -28,12 +28,12 @@
   gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x33
   gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|540|UINT32|0x34
   gLumia930PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|960|UINT32|0x35
-  gArmPlatformTokenSpaceGuid.PcdSystemMemoryUefiRegionSize|0x00800000|UINT32|0x00000036
+  gArmPlatformTokenSpaceGuid.PcdSystemMemoryUefiRegionSize|0x08000000|UINT32|0x00000036 #0x00800000
   #gArmPlatformTokenSpaceGuid.PcdCPUCoresStackBase|0x00C00000|UINT64|0x00000037
   gArmPlatformTokenSpaceGuid.PcdCPUCorePrimaryStackSize|0x10000|UINT32|0x00000038
   gArmPlatformTokenSpaceGuid.PcdCPUCoreSecondaryStackSize|0x10000|UINT32|0x00000039
  # Memory allocation
-  gLumia930PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x7CD00000|UINT64|0x00000a106
+  gLumia930PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x3CD00000|UINT64|0x00000a106
   gLumia930PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000|UINT32|0x00000a107
 
   # QTimer
