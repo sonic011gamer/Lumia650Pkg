@@ -9,7 +9,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
-  Lumia930Pkg/Lumia930Pkg.dec
+  Lumia535Pkg/Lumia535Pkg.dec
 
 [LibraryClasses]
   BaseLib
