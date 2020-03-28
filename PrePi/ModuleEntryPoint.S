@@ -34,7 +34,8 @@ _StackBase:
 _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
-
+FB_ADDR:
+  .quad FixedPcdGet32(PcdMipiFrameBufferAddress)
 
 
 _ModuleEntryPoint:

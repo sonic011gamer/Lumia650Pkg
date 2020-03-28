@@ -47,6 +47,9 @@
 #define FB_ADDR                 0x400000
 #endif
 
+#define FB_ADDR_REG             0xFD990008 //0xFD901E14 
+#define FB_NEW_ADDR             FixedPcdGet32(PcdMipiFrameBufferAddress)
+
 UINT64 mSystemMemoryEnd = FixedPcdGet64(PcdSystemMemoryBase) +
                           FixedPcdGet64(PcdSystemMemorySize) - 1;
 
@@ -57,6 +60,13 @@ UartInit
 )
 {
 
+    // Move Framebuffer to the top
+    MmioWrite32(FB_ADDR_REG,FB_NEW_ADDR);
+    // Flush using CTL0_FLUSH and Flush VIG0
+    // MmioWrite32(0xfd900618,0x00000001);
+    // MmioWrite32(0xfd900718,0x00000001); 
+
+
     SerialPortInitialize();
     DEBUG ((EFI_D_ERROR, "\nTianoCore on Nokia Lumia 535 (ARM)\n"));
     DEBUG ((EFI_D_ERROR,  "Firmware version %s built %a %a\n\n",
@@ -64,6 +74,12 @@ UartInit
 			        __TIME__,
 				__DATE__
 	));
+
+    DEBUG((
+        EFI_D_INFO | EFI_D_LOAD,
+        "SRC0_addrs at 0x%p\n",
+        MmioRead32(0xFD901EA4)
+  )); 
 }
 
 VOID
