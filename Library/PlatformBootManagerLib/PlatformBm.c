@@ -329,6 +329,44 @@ AddOutput (
     ReportText));
 }
 
+
+EFI_STATUS
+ConsoleSetBestMode (
+  IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL *Console
+)
+{
+  EFI_STATUS Status;
+  UINT32     ModeNumber;
+  UINT32     BestMode = 0;
+  UINTN      BestModeCells = 0;
+  UINTN      Columns, Rows;
+
+  //
+  // Find the highest resolution supported.
+  //
+  for (ModeNumber = 0; ModeNumber < Console->Mode->MaxMode; ModeNumber++) {
+    Status = Console->QueryMode (
+                       Console,
+                       ModeNumber,
+                       &Columns,
+                       &Rows
+                       );
+    UINTN Cells = Columns * Rows;
+    if (!EFI_ERROR (Status)) {
+      if (Cells > BestModeCells) {
+        BestModeCells = Cells;
+        BestMode = ModeNumber;
+      }
+    }
+  }
+
+  Status = Console->SetMode (Console, BestMode);
+
+  return Status;
+}
+
+
+
 STATIC
 VOID
 EFIAPI
@@ -688,6 +726,8 @@ PlatformBootManagerAfterConsole (
   VOID
   )
 {
+  ConsoleSetBestMode(gST->ConOut);
+  
   EFI_STATUS                    Status;
   EFI_GRAPHICS_OUTPUT_PROTOCOL  *GraphicsOutput;
   UINTN                         FirmwareVerLength;
