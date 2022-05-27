@@ -34,10 +34,6 @@ _StackBase:
 _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
-FB_ADDR:
-  .quad FixedPcdGet32(PcdMipiFrameBufferAddress)
-
-
 _ModuleEntryPoint:
   mov r0, #0
   bl ASM_PFX(ArmReadMpidr)

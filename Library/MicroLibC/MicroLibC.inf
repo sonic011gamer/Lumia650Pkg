@@ -15,8 +15,8 @@
 
 [Packages]
   MdePkg/MdePkg.dec
-  Lumia535Pkg/Lumia535Pkg.dec
-  Lumia535Pkg/Library/MicroLibC/MicroLibC.dec
+  Lumia650Pkg/Lumia650Pkg.dec
+  Lumia650Pkg/Library/MicroLibC/MicroLibC.dec
 
 [LibraryClasses]
   StrLib

@@ -39,7 +39,7 @@
   MdeModulePkg/MdeModulePkg.dec
   MdePkg/MdePkg.dec
   ShellPkg/ShellPkg.dec
-  Lumia535Pkg/Lumia535Pkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   BaseLib

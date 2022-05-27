@@ -43,7 +43,7 @@
 #define PMICV2_ARB_CHNLn_CMD0(x)               (PMICV2_ARB_CORE_REG_BASE + (x) * 0x8000)
 #define PMICV2_ARB_OBS_CHNLn_CMD0(x)           (PMICV2_ARB_OBS_CORE_REG_BASE + (x) * 0x8000)
 
-#define SPMIV1_MSM8612_MASTER_ID               0
+#define SPMIV1_MSM8909_MASTER_ID               0
 
 #define SPMIV1_GENI_REG(x)                     (SPMI_GENI_BASE + (x))
 #define SPMIV1_GENI_CFG_REG_BASE               SPMIV1_GENI_REG(0x100)

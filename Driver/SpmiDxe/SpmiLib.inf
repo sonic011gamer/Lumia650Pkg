@@ -13,7 +13,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
-  Lumia535Pkg/Lumia535Pkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   UefiBootServicesTableLib

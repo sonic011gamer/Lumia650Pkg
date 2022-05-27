@@ -1,4 +1,4 @@
-# Lumia535Pkg
+# Lumia650Pkg
 WIP Custom ARM UEFI firmware for Lumia 535
 
 # Current Status

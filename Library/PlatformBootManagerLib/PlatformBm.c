@@ -745,7 +745,7 @@ PlatformBootManagerAfterConsole (
       Print (VERSION_STRING_PREFIX L"%s\n",
         PcdGetPtr (PcdFirmwareVersionString));
     }
-    Print (L"Press ESCAPE for boot options ");
+    Print (L"Press POWER for boot options ");
   } else if (FirmwareVerLength > 0) {
     Status = gBS->HandleProtocol (gST->ConsoleOutHandle,
                     &gEfiGraphicsOutputProtocolGuid, (VOID **)&GraphicsOutput);
@@ -810,7 +810,7 @@ PlatformBootManagerWaitCallback (
   Status = BootLogoUpdateProgress (
              White.Pixel,
              Black.Pixel,
-             L"Press ESCAPE for boot options wait where is the ESC key here",
+             L"Press POWER for boot options.",
              White.Pixel,
              (Timeout - TimeoutRemain) * 100 / Timeout,
              0

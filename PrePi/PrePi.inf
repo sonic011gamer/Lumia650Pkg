@@ -23,7 +23,7 @@
   ArmPkg/ArmPkg.dec
   MdeModulePkg/MdeModulePkg.dec
   ArmPlatformPkg/ArmPlatformPkg.dec
-  Lumia535Pkg/Lumia535Pkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   ArmLib
@@ -71,6 +71,6 @@
 [Pcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
 
-  gLumia535PkgTokenSpaceGuid.PcdPreAllocatedMemorySize
-  gLumia535PkgTokenSpaceGuid.PcdUefiMemPoolSize
-  gLumia535PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gLumia650PkgTokenSpaceGuid.PcdPreAllocatedMemorySize
+  gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize
+  gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferAddress

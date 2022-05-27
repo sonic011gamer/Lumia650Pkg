@@ -121,7 +121,7 @@ SMBIOS_TABLE_TYPE0 mBIOSInfoType0 = {
 };
 
 CHAR8 *mBIOSInfoType0Strings[] = {
-  "Mr Tunnel.", // Vendor String
+  "Blue spoghet.", // Vendor String
   "Built: " __DATE__,             // BiosVersion String
   "Built: " __DATE__,             // BiosReleaseDate String
   NULL
@@ -143,10 +143,10 @@ SMBIOS_TABLE_TYPE1 mSysInfoType1 = {
 };
 CHAR8  *mSysInfoType1Strings[] = {
   "Microsoft",
-  "Lumia 535",
-  "RM-1089",
+  "Lumia 650",
+  "RM-1152",
   "0bc52bb9-9473-4875-be2a-3973076c20e2",
-  "RM-1089",
+  "RM-1152",
   "Phone",
   NULL
 };
@@ -177,8 +177,8 @@ SMBIOS_TABLE_TYPE2  mBoardInfoType2 = {
 };
 CHAR8  *mBoardInfoType2Strings[] = {
   "Microsoft",
-  "Lumia 535",
-  "RM-1089",
+  "Lumia 650",
+  "RM-1152",
   "0bc52bb9-9473-4875-be2a-3973076c20e2",
   "",
   "",
@@ -207,7 +207,7 @@ SMBIOS_TABLE_TYPE3  mEnclosureInfoType3 = {
   { { 0 } },    // ContainedElements[1];
 };
 CHAR8  *mEnclosureInfoType3Strings[] = {
-  "Lumia 535",
+  "Lumia 650",
   "1",
   "0bc52bb9-9473-4875-be2a-3973076c20e2",
   "",
@@ -279,8 +279,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4 = {
     0   // ProcessorVoltageIndicateLegacy      :1;
   },
   0,                      // ExternalClock;
-  2000,                      // MaxSpeed;
-  2000,                      // CurrentSpeed;
+  1300,                      // MaxSpeed;
+  1300,                      // CurrentSpeed;
   0x41,                   // Status;
   ProcessorUpgradeOther,  // ProcessorUpgrade;      ///< The enumeration value from PROCESSOR_UPGRADE.
   0xFFFF,                      // L1CacheHandle;
@@ -289,8 +289,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4 = {
   0,                      // SerialNumber;
   0,                      // AssetTag;
   4,                      // PartNumber;
-  1,                      // CoreCount;
-  1,                      // EnabledCoreCount;
+  4,                      // CoreCount;
+  4,                      // EnabledCoreCount;
   0,                      // ThreadCount;
   0x8,                   // ProcessorCharacteristics;
   ProcessorFamilyARM,     // ARM Processor Family;
@@ -299,8 +299,8 @@ SMBIOS_TABLE_TYPE4 mProcessorInfoType4 = {
 CHAR8 *mProcessorInfoType4Strings[] = {
   "Socket",
   "Qualcomm Inc.",
-  "Qualcomm Snapdragon 200 Processor (8612)",
-  "MSM8612",
+  "Qualcomm Snapdragon 212 Processor (8909v2)",
+  "MSM8909v2",
   NULL
 };
 

@@ -16,7 +16,7 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
-  Lumia535Pkg/Lumia535Pkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   BaseLib
@@ -36,9 +36,9 @@
   gEfiCpuArchProtocolGuid
 
 [FixedPcd]
-  gLumia535PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
-  gLumia535PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
-  gLumia535PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
+  gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferWidth
+  gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferHeight
 
 [Guids]
   gEfiMdeModulePkgTokenSpaceGuid
