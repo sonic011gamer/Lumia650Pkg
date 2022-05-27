@@ -1,6 +1,9 @@
 # Lumia650Pkg
-WIP Custom ARM UEFI firmware for Lumia 535
+ARM UEFI firmware for Lumia 650.
+Can be used for other msm8909 phones too.
 
 # Current Status
-Does boot Linux, although touch support is an issue. There is an effort to bring msm8212 devices up to mainline on the [Mainline4Lumia](https://github.com/mainline4Lumia/linux-next/tree/for-upstream/msm8212) repo.
-Based on [Lumia930Pkg](https://github.com/rickliu2000/Lumia930Pkg) by @rickliu2000
+Should be able to boot Linux. Mainline Linux for msm8909v2 will appear soon as this is just a CPU clock speed difference from msm8909 (1.1GHz vs 1.3GHz) 👍
+
+
+Based on [Lumia930Pkg](https://github.com/rickliu2000/Lumia930Pkg) by @rickliu2000 & [Lumia535Pkg](https://github.com/konradybcio/Lumia535Pkg).
