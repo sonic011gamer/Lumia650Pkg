@@ -30,6 +30,7 @@
   ArmMmuLib
   ArmPlatformLib
   ArmPlatformStackLib
+  CacheMaintenanceLib
   BaseLib
   DebugLib
   IoLib

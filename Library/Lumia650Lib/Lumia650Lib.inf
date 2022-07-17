@@ -36,7 +36,6 @@
 
 [Sources.Arm]
   Arm/ArmPlatformHelper.S    | GCC
-  Arm/ArmPlatformHelper.asm  | RVCT
 
 [FixedPcd]
   gArmTokenSpaceGuid.PcdArmPrimaryCoreMask
