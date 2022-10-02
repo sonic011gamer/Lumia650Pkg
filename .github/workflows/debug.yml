@@ -37,13 +37,8 @@ jobs:
         cd /home/runner/work/EDK2WorkDir/edk2 
         . /home/runner/work/EDK2WorkDir/edk2/edksetup.sh 
         GCC5_ARM_PREFIX=arm-linux-gnueabihf- build -a ARM -p Lumia650Pkg/Lumia650.dsc -t GCC5 -j$(nproc) -s -n 0
-      
-    - name: Build BootShim
-      run: cd /home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg && chmod +x build_boot_shim.sh && ./build_boot_shim.sh
-
-
-    - name: Build UEFI.img
-      run: cd /home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg && chmod +x build_boot_images.sh && ./build_boot_images.sh
+        ./Lumia650Pkg/build_boot_shim.sh
+        ./Lumia650Pkg/build_boot_images.sh
 
     - uses: actions/upload-artifact@v3
       with:
