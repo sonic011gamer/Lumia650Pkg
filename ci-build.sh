@@ -1,6 +1,7 @@
 #!/bin/bash
 curdir="$PWD"
 git clone https://github.com/Tianocore/edk2.git -b stable/202011 --depth=1 --recursive ../edk2
+export PACKAGES_PATH=$PWD/../edk2:$PWD/../:$PWD
 cd ../edk2
 make -C BaseTools/
 . edksetup.sh
