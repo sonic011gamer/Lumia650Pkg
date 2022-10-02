@@ -17,7 +17,7 @@ jobs:
       run: sudo apt update
     
     - name: Install dependencies
-      run: sudo apt install build-essential crossbuild-essential-armhf uuid-dev iasl git nasm python3-distutils
+      run: sudo apt install build-essential crossbuild-essential-armhf uuid-dev iasl git nasm python3-distutils mkbootimg
     
     - name: CI build
       run: chmod +x ci-build.sh && ./ci-build.sh
