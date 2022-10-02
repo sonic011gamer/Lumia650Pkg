@@ -44,7 +44,7 @@ jobs:
 
 
     - name: Build UEFI.img
-      ./home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg/build_boot_images.sh
+      run: ./home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg/build_boot_images.sh
 
     - uses: actions/upload-artifact@v3
       with:
