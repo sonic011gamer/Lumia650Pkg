@@ -5,7 +5,8 @@ cd ../edk2
 make -C BaseTools/
 . edksetup.sh
 cd ..
-GCC5_ARM_PREFIX=arm-linux-gnueabihf- build -a ARM -p Lumia650Pkg/Lumia650.dsc -t GCC5 -j$(nproc) -s -n 0
-./Lumia650Pkg/build_boot_shim.sh
-./Lumia650Pkg/build_boot_images.sh
+GCC5_ARM_PREFIX=arm-linux-gnueabihf- build -a ARM -p ../Lumia650Pkg/Lumia650.dsc -t GCC5 -j$(nproc) -s -n 0
 cd $curdir
+./build_boot_shim.sh
+./build_boot_images.sh
+
