@@ -41,7 +41,7 @@ jobs:
         ./Lumia650Pkg/build_boot_images.sh
     - name: Build BootShim
       run: |
-      cd /home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg/BootShim
+      cd /home/runner/work/EDK2WorkDir/edk2/Lumia650Pkg/BootShim/
       make UEFI_BASE=0x80200000 UEFI_SIZE=0x00100000
 
     - name: Build bootimg
