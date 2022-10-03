@@ -1,7 +1,13 @@
 _Head:
 	/* Set _Entry address */
 	adr		r1, _Payload
-
+	mov		r0, r2
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	adr 	r0, _Start
 	/* Jump to the real code */
 	b		r0
@@ -14,11 +20,11 @@ _StackBase:
 
 _StackSize:
 	/* ARM Magic */
-	.ascii "ARM"
+	.byte 0x18, 0x28, 0x6f, 0x01
 	/* Image Size */
 	.quad UEFI_SIZE
-	/* Flags */
-	.quad 0
+	/* Endianness Flags */
+	.byte 0x01, 0x02, 0x3, 0x4
 
 _Start:
 	mov		r4, r1
