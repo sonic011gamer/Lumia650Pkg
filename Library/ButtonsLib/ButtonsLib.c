@@ -17,7 +17,6 @@ Qualcomm Technologies Proprietary and Confidential.
 #include <Library/UefiRuntimeServicesTableLib.h>
 #include <Library/ButtonsLib.h>
 #include <Library/PcdLib.h>
-#include <Library/OfflineCrashDump.h>
 
 #include "ButtonsLibPrivate.h"
 
