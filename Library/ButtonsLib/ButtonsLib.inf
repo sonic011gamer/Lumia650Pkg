@@ -22,8 +22,7 @@
 [Packages]
   MdePkg/MdePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  QcomPkg/QcomPkg.dec
-  QcomPkg/Msm8916Pkg/Msm8916Pkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   BaseMemoryLib
