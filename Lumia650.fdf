@@ -59,8 +59,7 @@ READ_LOCK_STATUS   = TRUE
   INF Lumia650Pkg/GPLDriver/GpioTlmmInterruptDxe/GpioTlmmInterruptDxe.inf
   INF Lumia650Pkg/Driver/SpmiDxe/SpmiDxe.inf
   INF Lumia650Pkg/Driver/Pm8x41Dxe/Pm8x41Dxe.inf
-#  INF Lumia650Pkg/Driver/GenericKeypadDeviceDxe/GenericKeypadDeviceDxe.inf
-#  INF Lumia650Pkg/Driver/KeypadDxe/KeypadDxe.inf
+  INF Lumia650Pkg/Driver/ButtonsDxe/ButtonsDxe.inf
   INF Lumia650Pkg/Driver/ClockDxe/ClockDxe.inf
   INF Lumia650Pkg/Driver/SdhciMMCHSDxe/SdhciMMCHS.inf
 

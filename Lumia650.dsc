@@ -45,6 +45,9 @@
   #gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleWidth|720
   #gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferVisibleHeight|1280
 
+  # PON Debounce
+  gQcomTokenSpaceGuid.PcdPONDebounce|0x00000001 # max value 0x07
+  
 [PcdsDynamicDefault.common]
   #
   # Set video resolution for boot options and for text setup.

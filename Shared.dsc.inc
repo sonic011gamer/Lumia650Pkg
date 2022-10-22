@@ -232,8 +232,7 @@
   QTimerLib|Lumia650Pkg/Library/QTimerLib/QTimerLib.inf
   InterruptsLib|Lumia650Pkg/Library/InterruptsLib/InterruptsLib.inf
   MallocLib|Lumia650Pkg/Library/MallocLib/MallocLib.inf
-  KeypadDeviceHelperLib|Lumia650Pkg/Library/KeypadDeviceHelperLib/KeypadDeviceHelperLib.inf
-  KeypadDeviceImplLib|Lumia650Pkg/Library/KeypadDeviceImplLib/KeypadDeviceImplLib.inf
+  ButtonsLib|Lumia650Pkg/Library/ButtonsLib/ButtonsLib.inf
   DloadUtilLib|Lumia650Pkg/Library/DloadUtilLib/DloadUtilLib.inf
   QcomPlatformClockInitLib|Lumia650Pkg/Library/QcomPlatformClockInitLib/QcomPlatformClockInitLib.inf
   QcomPlatformMmcLib|Lumia650Pkg/Library/PlatformMmcLib/QcomPlatformMmcLib.inf
@@ -361,8 +360,7 @@
   Lumia650Pkg/GPLDriver/GpioTlmmInterruptDxe/GpioTlmmInterruptDxe.inf
   Lumia650Pkg/Driver/SpmiDxe/SpmiDxe.inf
   Lumia650Pkg/Driver/Pm8x41Dxe/Pm8x41Dxe.inf
-#  Lumia650Pkg/Driver/GenericKeypadDeviceDxe/GenericKeypadDeviceDxe.inf
-#  Lumia650Pkg/Driver/KeypadDxe/KeypadDxe.inf
+  Lumia650Pkg/Driver/ButtonsDxe/ButtonsDxe.inf
   Lumia650Pkg/Driver/ClockDxe/ClockDxe.inf
   Lumia650Pkg/Driver/SdhciMMCHSDxe/SdhciMMCHS.inf
 
