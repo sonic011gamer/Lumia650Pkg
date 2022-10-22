@@ -35,7 +35,7 @@
   gLumia650PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x3CD00000|UINT64|0x00000a106
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000|UINT32|0x00000a107
   # PON Debounce
-  gQcomTokenSpaceGuid.PcdPONDebounce|0x00000001 # max value 0x07
+  gQcomTokenSpaceGuid.PcdPONDebounce|0x00000000|UINT32|0x00000F09
   # QTimer
   gQcomTokenSpaceGuid.PcdQTimerBase|0xF9021000|UINT64|0x00000050
 
