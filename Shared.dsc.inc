@@ -219,7 +219,7 @@
 
     # Platform Drivers
 !if $(USE_SCREEN_FOR_SERIAL_OUTPUT) == 1
-  SerialPortLib|Lumia950XLPkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
+  SerialPortLib|Lumia650Pkg/Library/FrameBufferSerialPortLib/FrameBufferSerialPortLib.inf
 !else
   SerialPortLib|MdePkg/Library/BaseSerialPortLibNull/BaseSerialPortLibNull.inf
 !endif
