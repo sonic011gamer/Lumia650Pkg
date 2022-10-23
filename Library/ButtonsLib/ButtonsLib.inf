@@ -17,7 +17,8 @@
 [Sources.common]
   ButtonsLib.c
 
-[BuildOptions]
+[BuildOptions.ARM]
+  GCC:*_*_*_CC_FLAGS = -Wno-pointer-to-int-cast -Wno-overflow -Wno-return-type
 
 [Packages]
   MdePkg/MdePkg.dec
