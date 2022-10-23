@@ -20,7 +20,6 @@ Qualcomm Technologies Proprietary and Confidential.
 
 #include "ButtonsLibPrivate.h"
 
-EFI_PLATFORMINFO_PLATFORM_TYPE  PlatformType ;
 EFI_QCOM_SPMI_PROTOCOL  *SPMIProtocol;
 EFI_TLMM_PROTOCOL *TLMMProtocol;
 
@@ -29,14 +28,14 @@ BOOLEAN isEfiKeyDetected = FALSE;
 BOOLEAN isHomeKeyDetected = FALSE;
 extern EFI_GUID gQcomTokenSpaceGuid;
 
-#define NUMBER_OF_KEYS 3
+#define NUMBER_OF_KEYS 4
 
 /*** Define the Key Map for all Platforms ***/
 
 //KeyMap for CDP, MTP and FLUID
-KEY_TYPE KeyMap_8x09_CDP_MTP_FLUID_QRD_SBC[ NUMBER_OF_KEYS] =
+KEY_TYPE KeyMap_8x09[ NUMBER_OF_KEYS] =
 {
-   PWR, VOL_UP, VOL_DOWN
+   PWR, VOL_UP, VOL_DOWN, NONE
 };
 
 
@@ -195,7 +194,7 @@ EFI_STATUS ConvertEfiKeyCode (
       }
       else if( bPwrKeyPressed )
       {
-        EfiKey.ScanCode = SCAN_SUSPEND;
+        EfiKey.ScanCode = CHAR_CARRIAGE_RETURN;
       }
       else
       {
@@ -241,49 +240,9 @@ EFI_STATUS InitializeKeyMap (
    KEY_TYPE      *pKeyMap
    )
 {
-   EFI_PLATFORMINFO_PROTOCOL *pPlatformInfoProtocol;
-   EFI_PLATFORMINFO_PLATFORM_INFO_TYPE  platformInfo;
-   EFI_STATUS Status;
 
-   Status = gBS->LocateProtocol ( &gEfiPlatformInfoProtocolGuid,
-      NULL,
-      (VOID **)&pPlatformInfoProtocol
-      );
-
-   if ( Status != EFI_SUCCESS )
-   {
-      DEBUG(( EFI_D_ERROR, "ButtonsInit: Failed to locate PlatformInfo Protocol, Status =  (0x%x)\r\n", Status ));
-      goto ErrorExit;
-   }
-
-   if( !pPlatformInfoProtocol )
-   {
-       Status = EFI_INVALID_PARAMETER;
-       goto ErrorExit;
-   }
-
-   pPlatformInfoProtocol->GetPlatformInfo( pPlatformInfoProtocol, &platformInfo );
-   PlatformType = platformInfo.platform;
-
-   switch ( PlatformType )
-   {
-   case EFI_PLATFORMINFO_TYPE_CDP:
-   case EFI_PLATFORMINFO_TYPE_MTP_MSM:
-   case EFI_PLATFORMINFO_TYPE_FLUID:
-   case EFI_PLATFORMINFO_TYPE_QRD:
-   case EFI_PLATFORMINFO_TYPE_SBC:
-      CopyMem( pKeyMap, KeyMap_8x09_CDP_MTP_FLUID_QRD_SBC, NUMBER_OF_KEYS*sizeof(KEY_TYPE) );
-      break;
-   default:
-      Status = EFI_INVALID_PARAMETER;
-      goto ErrorExit;
-   }
-
+   CopyMem( pKeyMap, KeyMap_8x09, NUMBER_OF_KEYS*sizeof(KEY_TYPE) );
    *pNumberofKeys = NUMBER_OF_KEYS;
-
-ErrorExit:
-   return Status;
-
 }
 
 /**
@@ -310,6 +269,10 @@ EFI_STATUS ConfigureButtonGPIOs ( VOID )
       DEBUG(( EFI_D_ERROR, "ConfigureButtonGPIOs:failed to configure VOL+ button, Status = (0x%x)\r\n", Status));
       goto ErrorExit;
    }
+   else 
+   {
+      DEBUG(( EFI_D_INFO | EFI_D_LOAD, "ConfigureButtonGPIOs:configured VOL+ button\r\n"));
+   }
 
    // volume down
    Status = TLMMProtocol->ConfigGpio(
@@ -320,6 +283,10 @@ EFI_STATUS ConfigureButtonGPIOs ( VOID )
    {
       DEBUG(( EFI_D_ERROR, "ConfigureButtonGPIOs:failed to configure VOL- button, Status = (0x%x)\r\n", Status));
       goto ErrorExit;
+   }
+   else 
+   {
+      DEBUG(( EFI_D_INFO | EFI_D_LOAD, "ConfigureButtonGPIOs:configured VOL- button\r\n"));
    }
 
 ErrorExit:
@@ -432,6 +399,10 @@ EFI_STATUS ButtonsInit (
       DEBUG(( EFI_D_ERROR, "ButtonsInit: InitializeKeyMap() failed, Status =  (0x%x)\r\n", Status ));
       goto ErrorExit;
    }
+   else 
+   {
+      DEBUG(( EFI_D_INFO | EFI_D_LOAD, "ButtonsInit: InitializeKeyMap()\r\n"));
+   }
 
    // Configure button GPIOs
    Status = ConfigureButtonGPIOs();
@@ -440,6 +411,10 @@ EFI_STATUS ButtonsInit (
       DEBUG(( EFI_D_ERROR, "ButtonsInit: ConfigureButtonGPIOs() failed, Status =  (0x%x)\r\n", Status ));
       goto ErrorExit;
    }
+   else 
+   {
+      DEBUG(( EFI_D_INFO | EFI_D_LOAD, "ButtonsInit: ConfigureButtonGPIOs()\r\n"));
+   }
 
    // Configure PON Debounce
    Status = ConfigurePONDebounce();
@@ -447,6 +422,10 @@ EFI_STATUS ButtonsInit (
    {
       DEBUG(( EFI_D_ERROR, "ButtonsInit: ConfigurePONDebounce() failed, Status =  (0x%x)\r\n", Status ));
       goto ErrorExit;
+   }
+   else 
+   {
+      DEBUG(( EFI_D_INFO | EFI_D_LOAD, "ButtonsInit: ConfigurePONDebounce()\r\n"));
    }
 
 ErrorExit:
