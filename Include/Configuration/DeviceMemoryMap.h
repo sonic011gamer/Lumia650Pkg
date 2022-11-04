@@ -1,3 +1,4 @@
+
 #ifndef _DEVICE_MEMORY_MAP_H_
 #define _DEVICE_MEMORY_MAP_H_
 
@@ -6,22 +7,15 @@
 #define MAX_ARM_MEMORY_REGION_DESCRIPTOR_COUNT 64
 
 /* Below flag is used for system memory */
-#define SYSTEM_MEMORY_RESOURCE_ATTR_CAPABILITIES \
-                EFI_RESOURCE_ATTRIBUTE_PRESENT |                 \
-                EFI_RESOURCE_ATTRIBUTE_INITIALIZED |             \
-                EFI_RESOURCE_ATTRIBUTE_TESTED |                  \
-                EFI_RESOURCE_ATTRIBUTE_UNCACHEABLE |             \
-                EFI_RESOURCE_ATTRIBUTE_WRITE_COMBINEABLE |       \
-                EFI_RESOURCE_ATTRIBUTE_WRITE_THROUGH_CACHEABLE | \
-                EFI_RESOURCE_ATTRIBUTE_WRITE_BACK_CACHEABLE |    \
-                EFI_RESOURCE_ATTRIBUTE_EXECUTION_PROTECTABLE
+#define SYSTEM_MEMORY_RESOURCE_ATTR_CAPABILITIES                               \
+  EFI_RESOURCE_ATTRIBUTE_PRESENT | EFI_RESOURCE_ATTRIBUTE_INITIALIZED |        \
+      EFI_RESOURCE_ATTRIBUTE_TESTED | EFI_RESOURCE_ATTRIBUTE_UNCACHEABLE |     \
+      EFI_RESOURCE_ATTRIBUTE_WRITE_COMBINEABLE |                               \
+      EFI_RESOURCE_ATTRIBUTE_WRITE_THROUGH_CACHEABLE |                         \
+      EFI_RESOURCE_ATTRIBUTE_WRITE_BACK_CACHEABLE |                            \
+      EFI_RESOURCE_ATTRIBUTE_EXECUTION_PROTECTABLE
 
-typedef enum {
-    NoHob,
-    AddMem,
-    AddDev,
-    MaxMem
-} DeviceMemoryAddHob;
+typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, MaxMem } DeviceMemoryAddHob;
 
 #define MEMORY_REGION_NAME_MAX_LENGTH 32
 
@@ -49,7 +43,11 @@ typedef struct {
 #define Conv EfiConventionalMemory
 #define BsData EfiBootServicesData
 #define RtData EfiRuntimeServicesData
+#define LdData EfiLoaderData
 #define MmIO EfiMemoryMappedIO
+#define MaxMem EfiMaxMemoryType
+#define BsCode EfiBootServicesCode
+#define RtCode EfiRuntimeServicesCode
 
 #define NS_DEVICE ARM_MEMORY_REGION_ATTRIBUTE_NONSECURE_DEVICE
 #define WRITE_THROUGH ARM_MEMORY_REGION_ATTRIBUTE_WRITE_THROUGH
