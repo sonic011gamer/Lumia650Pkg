@@ -32,7 +32,7 @@
   gArmPlatformTokenSpaceGuid.PcdCPUCorePrimaryStackSize|0x10000|UINT32|0x00000038
   gArmPlatformTokenSpaceGuid.PcdCPUCoreSecondaryStackSize|0x10000|UINT32|0x00000039
  # Memory allocation
-  gLumia650PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x3CD00000|UINT64|0x00000a106
+  gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolBase|0xBCD00000|UINT64|0x00000a106
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000|UINT32|0x00000a107
 
   # QTimer

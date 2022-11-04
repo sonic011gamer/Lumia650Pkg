@@ -5,10 +5,48 @@ ErasePolarity = 1
 BlockSize     = 0x200
 NumBlocks     = 0x800
 
-# 512 bytes of configuration header & 8 bytes of image header
-0x00000000|0x00100000
+################################################################################
+#
+# Following are lists of FD Region layout which correspond to the locations of different
+# images within the flash device.
+#
+# Regions must be defined in ascending order and may not overlap.
+#
+# A Layout Region start with a eight digit hex offset (leading "0x" required) followed by
+# the pipe "|" character, followed by the size of the region, also in hex with the leading
+# "0x" characters. Like:
+# Offset|Size
+# PcdOffsetCName|PcdSizeCName
+# RegionType <FV, DATA, or FILE>
+#
+################################################################################
+
+# from ArmVirtPkg/ArmVirtQemuKernel.fdf
+#
+# Implement the Linux kernel header layout so that the loader will identify
+# it as something bootable, and execute it with a FDT pointer in x0 or r2.
+#
+0x00000000|0x00008000
+DATA = {
+  0x08, 0x10, 0x4f, 0xe2, # adr r1, .
+  0x02, 0x00, 0xa0, 0xe1, # mov r0, r2 (DTB)
+  0x00, 0x00, 0xa0, 0xe1, # nop
+  0x00, 0x00, 0xa0, 0xe1, # nop
+  0x00, 0x00, 0xa0, 0xe1, # nop
+  0x00, 0x00, 0xa0, 0xe1, # nop
+  0x00, 0x00, 0xa0, 0xe1, # nop
+  0x00, 0x00, 0xa0, 0xe1, # nop
+
+  0xf6, 0x1f, 0x00, 0xea, # b 0x8000
+  0x18, 0x28, 0x6f, 0x01, # magic
+  0x00, 0x00, 0x00, 0x00, # start
+  0x00, 0x00, 0x20, 0x00, # image size: 2 MB
+  0x01, 0x02, 0x03, 0x04  # endiannness flag
+}
+
+0x00008000|0x001f8000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
-FV = FVMAIN_COMPACT
+FV = FVMAIN_COMPACTT
 
 [FV.FvMain]
 FvNameGuid         = f23b46dc-37b0-471e-b464-93dab4afee02

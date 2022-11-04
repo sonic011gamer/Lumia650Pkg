@@ -36,7 +36,7 @@
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x40000000         # 1GB
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x80000000
   gArmPlatformTokenSpaceGuid.PcdCoreCount|4
-  gLumia650PkgTokenSpaceGuid.PcdPreAllocatedMemorySize|0x3CD00000 #0FF00000
+  gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolBase|0xBCD00000 #0FF00000
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000
 
   # Default resolution for this firmware can be seen in dec file, override here for specific platform configuration if needed

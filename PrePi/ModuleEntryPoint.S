@@ -1,30 +1,20 @@
-//
-//  Copyright (c) 2011-2015, ARM Limited. All rights reserved.
-//  Copyright (c) 2019, RUIKAI LIU and MR TUNNEL. All rights reserved.
-//
-//  This program and the accompanying materials
-//  are licensed and made available under the terms and conditions of the BSD License
-//  which accompanies this distribution.  The full text of the license may be found at
-//  http://opensource.org/licenses/bsd-license.php
-//
-//  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
-//
-//
-
 #include <AsmMacroIoLib.h>
 #include <Library/PcdLib.h>
 #include <Chipset/ArmV7.h>
 
+.text
+.align 3
+
 #define LoadConstantToReg(Data, Reg) \
     ldr Reg, =Data
-
+    
+GCC_ASM_IMPORT (ArmDeInitialize)
 GCC_ASM_IMPORT (CEntryPoint)
 GCC_ASM_EXPORT (_ModuleEntryPoint)
-GCC_ASM_IMPORT (ArmWriteCpacr)
 GCC_ASM_IMPORT (ArmEnableInstructionCache)
 GCC_ASM_IMPORT (ArmEnableDataCache)
 GCC_ASM_IMPORT (ArmInvalidateTlb)
+
 .global _StackBase 
 .global _StackSize
 
@@ -35,9 +25,43 @@ _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
 _ModuleEntryPoint:
+  // check if we're located at expected location
+  adr r4, .
+  ldr r5, =_ModuleEntryPoint
+  cmp r4, r5
+  bne _CopyUEFI
+  b _ContinueModuleEntryPoint
+
+_CopyUEFI:
+  // find our start address by getting our expected offset, then subtracting it from our actual address
+  ldr r6,  =FixedPcdGet64 (PcdFdBaseAddress)
+  sub r5, r5, r6 // r5 now holds offset of ArmPlatformPeiBootAction from start of FD base
+  sub r4, r4, r5 // r4 now holds address of actual FD base
+
+  // tweak the return address
+  sub r14, r14, r4
+  add r14, r14, r6
+  ldr r5, =FixedPcdGet64 (PcdFdSize)
+
+  // crap memcpy
+_CopyLoop:
+  ldr r3, [r4], #16       //Load FD Address into r3 probably with a 16bit offset?
+  str r3, [r6], #16       //store into r3 the value from r6, memcpy most likely lol
+  subs r5, r5, #16         //substract 16bits from r5?
+  bne  _CopyLoop           
+
+_ContinueModuleEntryPoint:
+
+  /* World reset */
+  bl ASM_PFX(ArmDeInitialize)
+
+  /* Clear r0 for function calls below */
   mov r0, #0
+  mov r1, #0
+
   bl ASM_PFX(ArmReadMpidr)
   mov r8, r0
+
   /* First ensure all interrupts are disabled */
   bl ASM_PFX(ArmDisableInterrupts)
 
@@ -72,22 +96,12 @@ _EnableCache:
   bl ArmInvalidateDataCache
   bl ASM_PFX(ArmEnableInstructionCache)
   bl ASM_PFX(ArmEnableDataCache) 
-_PrepareArguments:
 
-	mov   r0, r8
+_PrepareArguments:
 	ldr   r1, _StackBase
 	ldr   r2, _StackSize
-	mov   r3, sp
 
-  // Move sec startup address into a data register
-  // Ensure we're jumping to FV version of the code (not boot remapped alias)
-  ldr   r4, =ASM_PFX(CEntryPoint)
-
-  // Jump to PrePiCore C code
-  //    r0 = MpId
-  //    r1 = UefiMemoryBase
-  //    r2 = StacksBase
-  blx   r4
+  bl CEntryPoint
 
 _NeverReturn:
   b _NeverReturn

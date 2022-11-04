@@ -72,6 +72,6 @@
 [Pcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
 
-  gLumia650PkgTokenSpaceGuid.PcdPreAllocatedMemorySize
+  gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolBase
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize
   gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
