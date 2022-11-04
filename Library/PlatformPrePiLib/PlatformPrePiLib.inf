@@ -14,7 +14,7 @@
   MdeModulePkg/MdeModulePkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
   ArmPkg/ArmPkg.dec
-  Nexus5XPkg/Nexus5XPkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [LibraryClasses]
   ArmLib
