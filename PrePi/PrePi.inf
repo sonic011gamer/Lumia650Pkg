@@ -7,9 +7,9 @@
 
 [Sources.common]
   Pi.c
-  EarlyQGic/EarlyQGic.c
 
 [Sources.ARM]
+  ProcessorSupport.S | GCC
   ReleaseInfo.S | GCC
   ModuleEntryPoint.S | GCC
 
