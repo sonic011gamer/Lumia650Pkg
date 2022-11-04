@@ -46,7 +46,7 @@ DATA = {
 
 0x00008000|0x000f8000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
-FV = FVMAIN_COMPACTT
+FV = FVMAIN_COMPACT
 
 [FV.FvMain]
 FvNameGuid         = f23b46dc-37b0-471e-b464-93dab4afee02
