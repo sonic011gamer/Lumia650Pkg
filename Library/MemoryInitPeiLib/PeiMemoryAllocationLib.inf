@@ -20,6 +20,9 @@
   VERSION_STRING                 = 1.0
   LIBRARY_CLASS                  = MemoryInitPeiLib|SEC PEIM
 
+[BuildOptions.ARM]
+  GCC:*_*_*_CC_FLAGS = -Werror -Wno-comment
+  
 [Sources]
   MemoryInitPeiLib.c
 
