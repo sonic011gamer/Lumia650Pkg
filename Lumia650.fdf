@@ -2,8 +2,8 @@
 BaseAddress   = 0x80200000|gArmTokenSpaceGuid.PcdFdBaseAddress  #The base address of the FLASH Device.
 Size          = 0x00100000|gArmTokenSpaceGuid.PcdFdSize         #The size in bytes of the FLASH Device
 ErasePolarity = 1
-BlockSize     = 0x200
-NumBlocks     = 0x800
+BlockSize     = 0x00001000
+NumBlocks     = 0x100
 
 ################################################################################
 #
@@ -40,7 +40,7 @@ DATA = {
   0xf6, 0x1f, 0x00, 0xea, # b 0x8000
   0x18, 0x28, 0x6f, 0x01, # magic
   0x00, 0x00, 0x00, 0x00, # start
-  0x00, 0x00, 0x20, 0x00, # image size: 2 MB
+  0x00, 0x00, 0x10, 0x00, # image size: 1 MB
   0x01, 0x02, 0x03, 0x04  # endiannness flag
 }
 
