@@ -123,7 +123,7 @@ ArmCallSmcHardCoded:
     ldr     r2, =0xA0000000
     ldr     r1, =0x12
     ldr     r0, =0x0200010f
-
+    .arch_extension sec
     smc     #0
 
     bx      lr
