@@ -44,7 +44,7 @@ DATA = {
   0x01, 0x02, 0x03, 0x04  # endiannness flag
 }
 
-0x00008000|0x001f8000
+0x00008000|0x000f8000
 gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
 FV = FVMAIN_COMPACTT
 
