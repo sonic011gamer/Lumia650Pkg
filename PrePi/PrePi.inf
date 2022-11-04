@@ -46,6 +46,7 @@
   HobLib
   CompilerIntrinsicsLib
   PlatformPeiLib
+  PlatformPrePiLib
   PrePiHobListPointerLib
   PrePiLib
 
