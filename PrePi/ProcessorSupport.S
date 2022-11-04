@@ -28,7 +28,7 @@ ArmDeInitialize:
 	// Clean, invalidate and disable data-cache
 	dsb
 	mrc		p15, 1, R6, c0, c0, 1			// Read CLIDR
-	ands	R3, R6, #&7000000				// Mask out all but Level of Coherency (LoC)
+	ands	R3, R6, #0x7000000				// Mask out all but Level of Coherency (LoC)
 	mov		R3, R3, LSR #23					// Cache level value (naturally aligned)
 	beq		Finished
 	mov		R10, #0
@@ -42,7 +42,7 @@ Loop1:
 	mcr		p15, 2, R10, c0, c0, 0			// write the Cache Size selection register (CSSELR) // OR in 1 for Instruction
 	isb										// isb to sync the change to the CacheSizeID reg
 	mrc		p15, 1, R12, c0, c0, 0			// reads current Cache Size ID register (CCSIDR)
-	and		R2, R12, #&7					// extract the line length field
+	and		R2, R12, #7					// extract the line length field
 	add		R2, R2, #4						// add 4 for the line length offset (log2 16 bytes)
 	ldr		R4, =0x3FF
 	ands	R4, R4, R12, LSR #3				// R4 is the max number on the way size (right aligned)
