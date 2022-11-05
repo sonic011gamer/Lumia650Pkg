@@ -27,14 +27,14 @@ _StackSize:
 _ModuleEntryPoint:
   // check if we're located at expected location
   adr r4, .
-  ldr r5, =_ModuleEntryPoint
+  ldr r5, =FixedPcdGet64 (PcdUefiLocation)
   cmp r4, r5
   bne _CopyUEFI
   b _ContinueModuleEntryPoint
 
 _CopyUEFI:
   // find our start address by getting our expected offset, then subtracting it from our actual address
-  ldr r6,  =FixedPcdGet64 (PcdFdBaseAddress)
+  ldr r6,  =FixedPcdGet64 (PcdUefiLocation)
   sub r5, r5, r6 // r5 now holds offset of ArmPlatformPeiBootAction from start of FD base
   sub r4, r4, r5 // r4 now holds address of actual FD base
 
@@ -109,3 +109,6 @@ _NeverReturn:
 .align 3
 dead:  
   b dead 
+
+
+  

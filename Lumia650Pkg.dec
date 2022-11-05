@@ -34,6 +34,7 @@
  # Memory allocation
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolBase|0xBCD00000|UINT64|0x00000a106
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize|0x03300000|UINT32|0x00000a107
+  gLumia650PkgTokenSpaceGuid.PcdUefiLocation|0x82000000|UINT32|0x00000a108
 
   # QTimer
   gQcomTokenSpaceGuid.PcdQTimerBase|0xF9021000|UINT64|0x00000050

@@ -76,3 +76,4 @@
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolBase
   gLumia650PkgTokenSpaceGuid.PcdUefiMemPoolSize
   gLumia650PkgTokenSpaceGuid.PcdMipiFrameBufferAddress
+  gLumia650PkgTokenSpaceGuid.PcdUefiLocation
