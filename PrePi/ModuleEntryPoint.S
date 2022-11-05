@@ -18,7 +18,7 @@
 
 #define LoadConstantToReg(Data, Reg) \
     ldr Reg, =Data
-
+GCC_ASM_IMPORT (ArmDeInitialize)
 GCC_ASM_IMPORT (CEntryPoint)
 GCC_ASM_EXPORT (_ModuleEntryPoint)
 GCC_ASM_IMPORT (ArmWriteCpacr)
@@ -35,6 +35,10 @@ _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
 _ModuleEntryPoint:
+
+  /* World reset */
+  bl ASM_PFX(ArmDeInitialize)
+
   mov r0, #0
   bl ASM_PFX(ArmReadMpidr)
   mov r8, r0
