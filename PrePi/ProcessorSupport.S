@@ -28,7 +28,7 @@ ArmDeInitialize:
 	// Clean, invalidate and disable data-cache
 	dsb
 	mrc		p15, 1, R6, c0, c0, 1			// Read CLIDR
-	ands	R3, R6, #7000000				// Mask out all but Level of Coherency (LoC)
+	ands	R3, R6, =#7000000				// Mask out all but Level of Coherency (LoC)
 	mov		R3, R3, LSR #23					// Cache level value (naturally aligned)
 	beq		Finished
 	mov		R10, #0
