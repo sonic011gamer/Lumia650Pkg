@@ -63,10 +63,10 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] =
 //MemBase,   MemSize,   MemLabel(32 Char.), BuildHob, ResourceType, ResourceAttribute, MemoryType, CacheAttributes
 
 /*------------- DDR Regions ------*/
-{0x80000000, 0x00010000, "HLOS 0",           AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK},
-{0x80010000, 0x00014000, "DBI Dump",         NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
-{0x80024000, 0x001DC000, "HLOS 1",           AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK},
-{0x80200000, 0x00100000, "UEFI FD",          AddMem, SYS_MEM, SYS_MEM_CAP, BsCode, WRITE_BACK},
+//{0x80000000, 0x00010000, "HLOS 0",           AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK},
+//{0x80010000, 0x00014000, "DBI Dump",         NoHob,  MMAP_IO, INITIALIZED, Conv,   NS_DEVICE},
+//{0x80024000, 0x001DC000, "HLOS 1",           AddMem, SYS_MEM, SYS_MEM_CAP, Conv,   WRITE_BACK},
+{0x80000000, 0x00300000, "UEFI FD",          AddMem, SYS_MEM, SYS_MEM_CAP, BsCode, WRITE_BACK},
 {0x80300000, 0x00040000, "MPPark Code",      AddMem, MEM_RES, UNCACHEABLE, RtCode, UNCACHED_UNBUFFERED},
 {0x80340000, 0x00040000, "HLOS 2",           AddMem, SYS_MEM, SYS_MEM_CAP, BsData, UNCACHED_UNBUFFERED},
 {0x80380000, 0x00001000, "FBPT Payload",     AddMem, SYS_MEM, SYS_MEM_CAP, RtData, UNCACHED_UNBUFFERED},
