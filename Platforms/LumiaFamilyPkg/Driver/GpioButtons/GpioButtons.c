@@ -20,7 +20,7 @@ BOOLEAN VolumeUpState   = FALSE;
 BOOLEAN VolumeDownState = FALSE;
 
 /*
-Say volume button is pressed because we wan to go to frontpage.
+Say volume button is pressed because we want to go to frontpage.
 */
 EFI_STATUS
 EFIAPI

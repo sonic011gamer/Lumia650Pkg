@@ -10,13 +10,13 @@
 ##
 
 [BuildOptions.common]
-  *_GCC5_AARCH64_CC_FLAGS = -mfix-cortex-a53-835769 -mfix-cortex-a53-843419
-  *_GCC5_AARCH64_DLINK_FLAGS = -mfix-cortex-a53-835769 -mfix-cortex-a53-843419
+  *_GCC5_ARM_CC_FLAGS = -fno-stack-protector
+  *_GCC5_ARM_DLINK_FLAGS = -fno-stack-protector
   # Use Clang 11+ actually, some fixes are builtin
-  *_CLANG38_AARCH64_CC_FLAGS = -mfix-cortex-a53-835769 -Wno-unused-const-variable -Wno-sometimes-uninitialized -Wno-unaligned-access -D CLANG
-  *_CLANG38_AARCH64_DLINK_FLAGS = -mfix-cortex-a53-835769
+  *_CLANG38_AARCH64_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG
+  *_CLANG38_AARCH64_DLINK_FLAGS = 
+  *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES -D HAS_MEMCPY_INTRINSICS
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES -D HAS_MEMCPY_INTRINSICS -DUSE_MEMORY_FOR_SERIAL_OUTPUT=$(USE_MEMORY_FOR_SERIAL_OUTPUT) -DUSE_SCREEN_FOR_SERIAL_OUTPUT=$(USE_SCREEN_FOR_SERIAL_OUTPUT)
-  *_*_*_PP_FLAGS = -DICC_SGI1R=ICC_SGI1R_EL1
 
 [BuildOptions.common.EDKII.DXE_CORE,BuildOptions.common.EDKII.DXE_DRIVER,BuildOptions.common.EDKII.UEFI_DRIVER,BuildOptions.common.EDKII.UEFI_APPLICATION]
   *_*_*_DLINK_FLAGS = -z common-page-size=0x1000
@@ -45,7 +45,7 @@
 
 [PcdsFixedAtBuild.common]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVendor|L"LumiaWoA authors"
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2212.12"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString|L"2212.30"
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareRevision|0x0016040C
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"QCOM  "
   gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x324B44454D4F4351
@@ -93,13 +93,6 @@
   # Boot Manager
   gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|2
 
-  # PCI Express
-  gEfiMdeModulePkgTokenSpaceGuid.PcdSrIovSupport|FALSE
-  gEfiMdeModulePkgTokenSpaceGuid.PcdAriSupport|FALSE
-  gEfiMdeModulePkgTokenSpaceGuid.PcdMrIovSupport|FALSE
-  gArmTokenSpaceGuid.PcdPciBusMin|0x0
-  gArmTokenSpaceGuid.PcdPciBusMax|0xff
-
 !if $(SECURE_BOOT_ENABLE) == TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxAuthVariableSize|0x2800
   gEfiSecurityPkgTokenSpaceGuid.PcdUserPhysicalPresence|TRUE
@@ -120,7 +113,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x8A, 0x70, 0x42, 0x40, 0x2D, 0x0F, 0x23, 0x48, 0xAC, 0x60, 0x0D, 0x77, 0xB3, 0x11, 0x18, 0x89 }
 
   gOemPkgTokenSpaceGuid.PcdUefiVersionNumber|0x1160C0C # 1.22.12.12
-  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x16040C # 12/4/2022
+  gOemPkgTokenSpaceGuid.PcdUefiBuildDate|0x161E0C # 30/12/2022
 
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x2000
 
@@ -489,10 +482,6 @@
   MdeModulePkg/Universal/Acpi/AcpiPlatformDxe/AcpiPlatformDxe.inf
   MdeModulePkg/Universal/Acpi/BootGraphicsResourceTableDxe/BootGraphicsResourceTableDxe.inf
   MdeModulePkg/Universal/Acpi/FirmwarePerformanceDataTableDxe/FirmwarePerformanceDxe.inf
-
-  # Pci
-  MdeModulePkg/Bus/Pci/PciBusDxe/PciBusDxe.inf
-  MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf
 
   MdeModulePkg/Universal/ReportStatusCodeRouter/RuntimeDxe/ReportStatusCodeRouterRuntimeDxe.inf
   MdeModulePkg/Universal/StatusCodeHandler/RuntimeDxe/StatusCodeHandlerRuntimeDxe.inf

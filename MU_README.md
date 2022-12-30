@@ -1,8 +1,8 @@
-# [Project Mu](https://microsoft.github.io/mu/) UEFI Implementation for Lumia 950 Platforms
+# [Project Mu](https://microsoft.github.io/mu/) UEFI Implementation for Lumia 650
 
 ## Description
 
-This repository hosts the code and underlying work behind the Lumia 950 Windows UEFI firmware "bootstrapper" for Lumia 950 and Lumia 950 XL devices.
+Project MU for the Lumia 650, why not.
 
 ## Build
 
@@ -32,8 +32,7 @@ This repository hosts the code and underlying work behind the Lumia 950 Windows 
 
 # Build UEFI
 pip install --upgrade -r pip-requirements.txt
-./build_uefi_talkman.sh
-./build_uefi_cityman.sh
+./build_uefi_saana.sh
 
 # Generate ELF image
 chmod +x ./Tools/edk2-build.ps1 && ./Tools/edk2-build.ps1

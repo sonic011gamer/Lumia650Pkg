@@ -25,9 +25,9 @@ typedef enum { NoHob, AddMem, AddDev, HobOnlyNoCacheSetting, AllocOnly, MaxMem }
 #define MEMORY_REGION_NAME_MAX_LENGTH 32
 
 typedef struct {
-  CHAR8                        Name[MEMORY_REGION_NAME_MAX_LENGTH];
   EFI_PHYSICAL_ADDRESS         Address;
   UINT64                       Length;
+  CHAR8                        Name[MEMORY_REGION_NAME_MAX_LENGTH];
   DeviceMemoryAddHob           HobOption;
   EFI_RESOURCE_TYPE            ResourceType;
   EFI_RESOURCE_ATTRIBUTE_TYPE  ResourceAttribute;

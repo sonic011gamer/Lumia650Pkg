@@ -113,18 +113,18 @@
 
 [PcdsFixedAtBuild.common]
   # Simple FrameBuffer
-  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x00400000|UINT32|0x0000a400
-  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|1080|UINT32|0x0000a401
-  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1920|UINT32|0x0000a402
+  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferAddress|0x80400000|UINT32|0x0000a400
+  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferWidth|720|UINT32|0x0000a401
+  gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferHeight|1280|UINT32|0x0000a402
   gLumiaFamilyPkgTokenSpaceGuid.PcdMipiFrameBufferPixelBpp|32|UINT32|0x0000a403
 
   # SMBIOS
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 810 @ 1.96 GHz"|VOID*|0x0000a301
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorRetailModel|"MSM8994"|VOID*|0x0000a302
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemModel|"Lumia 950 XL"|VOID*|0x0000a303
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"RM-1085"|VOID*|0x0000a304
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"RM-1085"|VOID*|0x0000a305
-  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosBoardModel|"Lumia 950 XL"|VOID*|0x0000a306
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorModel|"Snapdragon (TM) 210 @ 1.10 GHz"|VOID*|0x0000a301
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosProcessorRetailModel|"MSM8909"|VOID*|0x0000a302
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemModel|"Lumia 650"|VOID*|0x0000a303
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailModel|"RM-1152"|VOID*|0x0000a304
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosSystemRetailSku|"RM-1152"|VOID*|0x0000a305
+  gLumiaFamilyPkgTokenSpaceGuid.PcdSmbiosBoardModel|"Lumia 650"|VOID*|0x0000a306
 
   # Debug Screen Serial
   gLumiaFamilyPkgTokenSpaceGuid.PcdEnableScreenSerial|FALSE|BOOLEAN|0x00000a105
