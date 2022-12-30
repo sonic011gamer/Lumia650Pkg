@@ -2,48 +2,39 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "650" ]
+    branches: [ "project_mu" ]
   pull_request:
-    branches: [ "650" ]
+    branches: [ "project_mu" ]
 
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
     - name: Update APT sources
       run: sudo apt update
     
-    - name: Install dependencies
-      run: sudo apt install build-essential crossbuild-essential-armhf uuid-dev iasl git nasm python3-distutils
+    - name: Install VSTS dependencies
+      run: sudo apt install -y uuid-dev clang llvm crossbuild-essential-armhf
     
-    - name: Create EDK2 workspace
-      run: mkdir /home/runner/work/EDK2WorkDir
+    - name: Setup CLANG environment
+      run: export CLANG38_BIN=/usr/lib/llvm-38/bin/ && export CLANG38_ARM_PREFIX=arm-linux-gnueabihf-
       
-    - name: Clone sources
-      run: |
-        cd /home/runner/work/EDK2WorkDir/
-        git clone https://github.com/Tianocore/edk2.git -b stable/202011 --depth=1 --recursive 
-        git clone https://github.com/sonic011gamer/Lumia650Pkg --depth=1 edk2/Lumia650Pkg
+    - name: Install Python dependencies
+      run: pip install --upgrade -r ./pip-requirements.txt
+
+    - name: Stamp build
+      run: chmod +x ./build_releaseinfo.ps1 && ./build_releaseinfo.ps1
+
+    - name: UEFI build
+      run: chmod +x ./build_uefi_saana.sh && ./build_uefi_saana.sh
       
-    - name: Build BaseTools
-      run: |
-        cd /home/runner/work/EDK2WorkDir/edk2 
-        make -C BaseTools/
-    - name: Build EDK2
-      run: |
-        cd /home/runner/work/EDK2WorkDir/edk2 
-        . /home/runner/work/EDK2WorkDir/edk2/edksetup.sh 
-        GCC5_ARM_PREFIX=arm-linux-gnueabihf- build -a ARM -p Lumia650Pkg/Lumia650.dsc -t GCC5 -j$(nproc) -s -n 0
-      
-    - name: Create ELF binary
-      run: |
-        cd /home/runner/work/EDK2WorkDir/edk2/Build/Lumia650-ARM/DEBUG_GCC5/FV 
-        arm-linux-gnueabihf-objcopy -I binary -O elf32-littlearm --binary-architecture arm MSM8909_EFI.fd MSM8909_EFI.fd.elf && arm-linux-gnueabihf-ld MSM8909_EFI.fd.elf -T ../../../../Lumia650Pkg/FvWrapper.ld -o ../../../../../emmc_appsboot.mbn
-      
+    - name: UEFI boot image build
+      run: chmod +x ./Tools/edk2-build.ps1 && ./Tools/edk2-build.ps1   
+         
     - uses: actions/upload-artifact@v3
       with:
-       name: emmc_appsboot.mbn
-       path: /home/runner/work/EDK2WorkDir/emmc_appsboot.mbn
+       name: Publish MSM8909 UEFI build
+       path: ./Build/Lumia650-ARM/DEBUG_CLANG38/FV/

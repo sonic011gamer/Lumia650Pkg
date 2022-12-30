@@ -1,0 +1,57 @@
+# Lumia950XLPkg CI build on VSTS
+
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    exclude:
+    - README.md
+    - LICENSE
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: sudo apt update 
+  displayName: 'Update APT sources'
+
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.10'
+    architecture: 'x64'
+  displayName: Install correct Python
+
+- script: sudo apt install -y uuid-dev clang llvm gcc-aarch64-linux-gnu
+  displayName: 'Install VSTS dependencies'
+
+- script: export CLANG38_BIN=/usr/lib/llvm-38/bin/ && export CLANG38_AARCH64_PREFIX=aarch64-linux-gnu-
+  displayName: 'Setup CLANG environment'
+
+- script: pip install --upgrade -r ./pip-requirements.txt
+  displayName: 'Install Python dependencies'
+
+- script: chmod +x ./build_releaseinfo.ps1 && ./build_releaseinfo.ps1
+  displayName: 'Stamp build'
+
+- script: chmod +x ./build_uefi_talkman.sh && ./build_uefi_talkman.sh
+  displayName: 'UEFI build (Lumia 950)'
+
+- script: chmod +x ./build_uefi_cityman.sh && ./build_uefi_cityman.sh
+  displayName: 'UEFI build (Lumia 950 XL)'
+
+- script: chmod +x ./Tools/edk2-build.ps1 && ./Tools/edk2-build.ps1
+  displayName: 'UEFI boot image build'
+
+# Publish UEFI (2 targets)
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish MSM8992 UEFI build (Lumia 950)'
+  inputs:
+    pathtoPublish: ./Build/Lumia950-AARCH64/DEBUG_CLANG38/FV/
+    artifactName: MSM8992 UEFI (Lumia 950)
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish MSM8994 UEFI build (Lumia 950 XL)'
+  inputs:
+    pathtoPublish: ./Build/Lumia950XL-AARCH64/DEBUG_CLANG38/FV/
+    artifactName: MSM8994 UEFI (Lumia 950 XL)

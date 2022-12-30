@@ -1,9 +1,13 @@
-# Lumia650Pkg
-ARM UEFI firmware for Lumia 650.
-Can be used for other msm8909 phones too.
+# EDK2 UEFI Implementation for Lumia 550 and Lumia 650
 
-# Current Status
-Boots linux from a close-to-upstream mainline fork.
+## Acknowledgements
 
+- [EFIDroid Project](http://efidroid.org)
+- Andrei Warkentin and his [RaspberryPiPkg](https://github.com/andreiw/RaspberryPiPkg)
+- Sarah Purohit
+- [Googulator](https://github.com/Googulator/)
 
-Based on [Lumia930Pkg](https://github.com/rickliu2000/Lumia930Pkg) by @rickliu2000 & [Lumia535Pkg](https://github.com/konradybcio/Lumia535Pkg).
+## License
+
+All code except drivers in `GPLDriver` directory are licensed under BSD 2-Clause. 
+GPL Drivers are licensed under GPLv2 license.
