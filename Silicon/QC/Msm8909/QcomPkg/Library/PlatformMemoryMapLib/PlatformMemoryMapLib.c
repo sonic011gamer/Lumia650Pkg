@@ -48,7 +48,7 @@ static ARM_MEMORY_REGION_DESCRIPTOR_EX gDeviceMemoryDescriptorEx[] = {
     {0x0C428000, 0x00008000, "REG 8",           AddDev, MMAP_IO,  UNCACHEABLE, MmIO,   NS_DEVICE},
 
     /* Terminator for MMU */
-    {"Terminator", 0, 0, 0, 0, 0, 0, 0}};
+    { 0, 0, "Terminator", 0, 0, 0, 0, 0}};
 
 ARM_MEMORY_REGION_DESCRIPTOR_EX *GetPlatformMemoryMap()
 {
