@@ -79,7 +79,7 @@
 
 #define CLK_CTL_BASE                0x1800000
 
-#define SPMI_BASE                   0x02000000
+//#define SPMI_BASE                   0x02000000
 #define SPMI_GENI_BASE              (SPMI_BASE + 0xA000)
 #define SPMI_PIC_BASE               (SPMI_BASE +  0x01800000)
 #define PMIC_ARB_CORE               0x200F000
