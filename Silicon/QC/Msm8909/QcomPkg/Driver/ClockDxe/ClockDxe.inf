@@ -25,7 +25,7 @@
   QcomPlatformClockInitLib
   TimerLib
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-pointer-to-int-cast -Wno-overflow
 
 [Protocols]

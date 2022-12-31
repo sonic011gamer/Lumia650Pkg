@@ -15,7 +15,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   LumiaFamilyPkg/LumiaFamilyPkg.dec
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Werror -Wno-error=unused-variable
 
 [LibraryClasses]

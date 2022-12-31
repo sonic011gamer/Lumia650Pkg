@@ -396,7 +396,7 @@ VOID EFIAPI PlatformBootManagerAfterConsole(VOID)
   //
   // Show version information.
   //
-  Print(L"Lumia AArch64 Bootstrap, version %a \n", __IMPL_COMMIT_ID__);
+  Print(L"Lumia ARM Bootstrap, version %a \n", __IMPL_COMMIT_ID__);
   Print(L"EDK2 base %a \n", __EDK2_RELEASE__);
   Print(L"Built by %a on %a \n", __BUILD_OWNER__, __RELEASE_DATE__);
 #ifdef CLANG

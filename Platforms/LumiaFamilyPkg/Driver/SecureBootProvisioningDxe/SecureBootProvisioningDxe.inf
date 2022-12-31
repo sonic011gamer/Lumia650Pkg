@@ -33,5 +33,5 @@
 [Depex]
   TRUE
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-missing-brace -Wno-error

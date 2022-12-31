@@ -41,7 +41,7 @@ VOID UartInit(VOID)
   SerialPortInitialize();
   InitializeSharedUartBuffers();
 
-  DEBUG((EFI_D_INFO, "\nProject Mu on Surface Duo (AArch64)\n"));
+  DEBUG((EFI_D_INFO, "\nProject Mu on Surface Duo (ARM)\n"));
   DEBUG(
       (EFI_D_INFO, "Firmware version %s built %a %a\n\n",
        (CHAR16 *)PcdGetPtr(PcdFirmwareVersionString), __TIME__, __DATE__));

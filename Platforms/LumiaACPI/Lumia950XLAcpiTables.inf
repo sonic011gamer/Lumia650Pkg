@@ -25,14 +25,14 @@
 #
 # The following information is for reference only and not required by the build tools.
 #
-#  VALID_ARCHITECTURES           = AARCH64
+#  VALID_ARCHITECTURES           = ARM
 #
 
 [Sources]
   FADT.aslc
   8994/src/PPTT.aslc
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-error=missing-braces
 
 [Packages]

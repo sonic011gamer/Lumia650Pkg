@@ -21,7 +21,7 @@
   KernelErrataPatcher.c
   Utilities.c
 
-[Sources.AARCH64]
+[Sources.ARM]
   OsLoaderHelper.S | GCC
 
 [Packages]

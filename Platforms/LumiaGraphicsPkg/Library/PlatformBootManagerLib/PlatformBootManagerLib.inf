@@ -43,7 +43,7 @@
   QcomPkg/QcomPkg.dec
   LumiaGraphicsPkg/LumiaGraphicsPkg.dec
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-unused-variable -Wno-unused-function
 
 [LibraryClasses]

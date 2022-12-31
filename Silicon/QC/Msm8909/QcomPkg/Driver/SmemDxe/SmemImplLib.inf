@@ -16,7 +16,7 @@
   ArmPkg/ArmPkg.dec
   QcomPkg/QcomPkg.dec
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 
 [Pcd.common]

@@ -25,9 +25,9 @@
 
   INF DfciPkg/Application/DfciMenu/DfciMenu.inf
 
-  # # Change AARCH64 to the appropriate architecture for your platform.
+  # # Change ARM to the appropriate architecture for your platform.
   # FILE APPLICATION=PCD(gPcBdsPkgTokenSpaceGuid.PcdShellFile) {
-  #   SECTION PE32=$(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/AARCH64/Shell.efi
+  #   SECTION PE32=$(OUTPUT_DIRECTORY)/$(TARGET)_$(TOOL_CHAIN_TAG)/ARM/Shell.efi
   #   SECTION UI= "EdkShell"
   # }
   FILE FREEFORM = PCD(gOemPkgTokenSpaceGuid.PcdLogoFile) {

@@ -18,7 +18,7 @@
   EmbeddedPkg/EmbeddedPkg.dec
   QcomPkg/QcomPkg.dec
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Werror
 
 [LibraryClasses]

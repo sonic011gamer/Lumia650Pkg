@@ -9,5 +9,5 @@
 [Binaries.Arm]
    PE32|ufpdevicefw.efi|RELEASE
 
-[Binaries.AARCH64]
+[Binaries.ARM]
    PE32|ufpdevicefw.efi|RELEASE

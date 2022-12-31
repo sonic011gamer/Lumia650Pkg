@@ -11,7 +11,7 @@
   Driver.c
   bam.c
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast
 
 [Packages]

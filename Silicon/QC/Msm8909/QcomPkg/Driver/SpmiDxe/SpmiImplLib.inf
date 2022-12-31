@@ -19,7 +19,7 @@
 [LibraryClasses]
   MallocLib
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-incompatible-pointer-types
 
 [Pcd.common]

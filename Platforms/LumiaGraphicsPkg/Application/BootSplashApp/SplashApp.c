@@ -243,7 +243,7 @@ EFI_STATUS EFIAPI InitializeBootSplash(
   }
 
   Status = DiscoverAndBootApp(
-      ImageHandle, EFI_REMOVABLE_MEDIA_FILE_NAME_AARCH64, NULL);
+      ImageHandle, EFI_REMOVABLE_MEDIA_FILE_NAME_ARM, NULL);
 
   // This is not expected, but it fails or exits, load shell/built-in menu
   Status = EfiBootManagerGetBootManagerMenu(&BootManagerMenu);

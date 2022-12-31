@@ -29,7 +29,7 @@
   QcomPlatformClock2Lib
   InterruptsLib
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-unused-function -Wno-unused-variable
 
 [Protocols]

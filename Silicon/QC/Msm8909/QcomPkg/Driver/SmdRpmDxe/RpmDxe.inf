@@ -30,7 +30,7 @@
   InterruptsLib
   UefiRuntimeServicesTableLib
 
-[BuildOptions.AARCH64]
+[BuildOptions.ARM]
   GCC:*_*_*_CC_FLAGS = -Wno-incompatible-pointer-types -Wno-unused-variable
 
 [Protocols]

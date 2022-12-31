@@ -34,8 +34,8 @@
   InitializationUtils.c
   LinuxUtils.c
 
-[Sources.AArch64]
-  AArch64/ArmPlatformHelper.S
+[Sources.ARM]
+  Arm/ArmPlatformHelper.S
 
 [Pcd]
   gEfiMdeModulePkgTokenSpaceGuid.PcdFirmwareVersionString
