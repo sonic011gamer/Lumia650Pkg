@@ -13,7 +13,7 @@
   *_GCC5_ARM_CC_FLAGS = -fno-stack-protector
   *_GCC5_ARM_DLINK_FLAGS = -fno-stack-protector
   # Use Clang 11+ actually, some fixes are builtin
-  *_CLANG38_ARM_CC_FLAGS = -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG
+  *_CLANG38_ARM_CC_FLAGS = -Wno-unaligned-access -Wno-unused-const-variable -Wno-sometimes-uninitialized -D CLANG
   *_CLANG38_ARM_DLINK_FLAGS = 
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES -D HAS_MEMCPY_INTRINSICS
 
