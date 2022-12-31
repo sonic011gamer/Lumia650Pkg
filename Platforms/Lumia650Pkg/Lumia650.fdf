@@ -200,8 +200,6 @@ READ_LOCK_STATUS   = TRUE
   INF AdvLoggerPkg/AdvancedFileLogger/AdvancedFileLogger.inf
   INF ArmPkg/Drivers/ArmPsciMpServicesDxe/ArmPsciMpServicesDxe.inf
   INF CryptoPkg/Driver/CryptoDxe.inf
-  INF MdeModulePkg/Bus/Pci/NvmExpressDxe/NvmExpressDxe.inf
-  INF MdeModulePkg/Bus/Pci/PciBusDxe/PciBusDxe.inf
   INF MdeModulePkg/Bus/Usb/UsbMouseAbsolutePointerDxe/UsbMouseAbsolutePointerDxe.inf
   INF MdeModulePkg/Universal/Acpi/FirmwarePerformanceDataTableDxe/FirmwarePerformanceDxe.inf
   INF MdeModulePkg/Universal/FvSimpleFileSystemDxe/FvSimpleFileSystemDxe.inf
