@@ -34,8 +34,8 @@ apt-get install -y powershell
 
 # Linaro Toolchains
 cd /opt
-wget http://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/aarch64-elf/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf.tar.xz
-tar xf gcc-linaro-7.5.0-2019.12-x86_64_aarch64-elf.tar.xz
+wget https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
+tar xf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz
 
 # Skip ACPI toolchain (prebuilt tables)
 

@@ -176,7 +176,7 @@ class PlatformBuilder( UefiBuilder, BuildSettingsManager):
     def GetName(self):
         ''' Get the name of the repo, platform, or product being build '''
         ''' Used for naming the log file, among others '''
-        return "Lumia950Pkg"
+        return "Lumia650Pkg"
 
     def GetLoggingLevel(self, loggerType):
         ''' Get the logging level for a given type

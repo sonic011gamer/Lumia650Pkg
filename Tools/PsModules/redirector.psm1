@@ -14,16 +14,16 @@
 #     return $iaslPath
 # }
 
-function Get-GnuAarch64CrossCollectionPath {
+function Get-GnuArmCrossCollectionPath {
     param(
         [switch]$AllowFallback
     )
 
     $possibleGccCommands = @(
-        "aarch64-elf-gcc",
-        "aarch64-none-elf-gcc",
-        "aarch64-unknown-elf-gcc",
-        "aarch64-linux-gnu-gcc"
+        "arm-eabi-gcc",
+        "arm-none-eabi-gcc",
+        "arm-unknown-eabi-gcc",
+        "arm-linux-gnueabihf-gcc"
     )
 
     $ccprefix = $null
@@ -38,8 +38,8 @@ function Get-GnuAarch64CrossCollectionPath {
     }
 
     if (($null -eq $ccprefix) -and $AllowFallback) {
-        $ccprefix = "/opt/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-elf/bin/aarch64-elf-"
-        Write-Warning -Message "GCC not found, fallback to /opt/gcc-linaro-7.4.1-2019.02-x86_64_aarch64-elf/bin/aarch64-elf- prefix."
+        $ccprefix = "/opt/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-"
+        Write-Warning -Message "GCC not found, fallback to /opt/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf- prefix."
     }
 
     # Now it's not the fallback case
@@ -47,16 +47,16 @@ function Get-GnuAarch64CrossCollectionPath {
         Write-Error -Message "GCC not found. Either Linaro or distro-GCC is needed for build."
     }
 
-    $env:GCC5_AARCH64_PREFIX = $ccprefix
+    $env:GCC5_ARM_PREFIX = $ccprefix
     return $ccprefix
 }
 
-function Test-GnuAarch64CrossCollectionVersionRequirements {
-    $prefix = Get-GnuAarch64CrossCollectionPath -AllowFallback
+function Test-GnuArmCrossCollectionVersionRequirements {
+    $prefix = Get-GnuArmCrossCollectionPath -AllowFallback
     $cc = "$($prefix)gcc"
     $versionOutput = . $cc --version
     if (($null -eq $versionOutput) -or ($versionOutput.Length -lt 1)) {
-        Write-Error -Message "GCC AArch64 toolchain is malfunctioned"
+        Write-Error -Message "GCC Arm toolchain is malfunctioned"
         return $false
     }
 
@@ -74,6 +74,6 @@ function Test-GnuAarch64CrossCollectionVersionRequirements {
 }
 
 # Exports
-Export-ModuleMember -Function Get-GnuAarch64CrossCollectionPath
-Export-ModuleMember -Function Test-GnuAarch64CrossCollectionVersionRequirements
+Export-ModuleMember -Function Get-GnuArmCrossCollectionPath
+Export-ModuleMember -Function Test-GnuArmCrossCollectionVersionRequirements
 Export-ModuleMember -Function Get-AcpiToolsPath

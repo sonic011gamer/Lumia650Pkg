@@ -20,7 +20,7 @@ jobs:
       run: sudo apt install -y uuid-dev clang llvm crossbuild-essential-armhf
     
     - name: Setup CLANG environment
-      run: export CLANG38_BIN=/usr/lib/llvm-38/bin/ && export CLANG38_ARM_PREFIX=arm-linux-gnueabihf-
+      run: export CLANG38_BIN=/usr/lib/llvm/bin/ && export CLANG38_ARM_PREFIX=arm-linux-gnueabihf-
       
     - name: Install Python dependencies
       run: pip install --upgrade -r ./pip-requirements.txt
