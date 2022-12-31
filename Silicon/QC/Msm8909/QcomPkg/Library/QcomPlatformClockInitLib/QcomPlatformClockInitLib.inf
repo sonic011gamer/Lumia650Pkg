@@ -7,17 +7,18 @@
   LIBRARY_CLASS                  = QcomPlatformClockInitLib
 
 [Sources.common]
-  msm8994-clock.c
+  msm8909-clock.c
 
 [Packages]
   MdePkg/MdePkg.dec
   ArmPkg/ArmPkg.dec
   EmbeddedPkg/EmbeddedPkg.dec
-  QcomPkg/QcomPkg.dec
+  Lumia650Pkg/Lumia650Pkg.dec
 
 [BuildOptions.ARM]
-  GCC:*_*_*_CC_FLAGS = -Wno-overflow -Wno-unused-variable
-
+  GCC:*_*_*_CC_FLAGS = -Wno-overflow -Wno-unused-variable -Wno-int-conversion
+  
 [LibraryClasses]
   IoLib
   ArmLib
+
