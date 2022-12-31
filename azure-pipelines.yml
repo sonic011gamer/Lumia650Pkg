@@ -43,15 +43,9 @@ steps:
 - script: chmod +x ./Tools/edk2-build.ps1 && ./Tools/edk2-build.ps1
   displayName: 'UEFI boot image build'
 
-# Publish UEFI (2 targets)
+# Publish UEFI
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish MSM8992 UEFI build (Lumia 950)'
+  displayName: 'Publish MSM8909 UEFI build'
   inputs:
-    pathtoPublish: ./Build/Lumia950-AARCH64/DEBUG_CLANG38/FV/
-    artifactName: MSM8992 UEFI (Lumia 950)
-
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish MSM8994 UEFI build (Lumia 950 XL)'
-  inputs:
-    pathtoPublish: ./Build/Lumia950XL-AARCH64/DEBUG_CLANG38/FV/
-    artifactName: MSM8994 UEFI (Lumia 950 XL)
+    pathtoPublish: ./Build/Lumia650-ARM/DEBUG_CLANG38/FV/
+    artifactName: MSM8909 UEFI (Lumia 650)

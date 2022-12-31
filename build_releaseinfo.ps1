@@ -8,7 +8,7 @@ Write-Output "Stamp build."
 # This one is EDK2 base commit
 Set-Location MU_BASECORE
 $edk2Commit = git rev-parse HEAD
-# This is Lumia950XLPkg package commit
+# This is Lumia650Pkg package commit
 Set-Location ..
 $commit = git rev-parse HEAD
 $date = (Get-Date).Date.ToString("MM/dd/yyyy")

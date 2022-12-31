@@ -183,7 +183,7 @@ READ_LOCK_STATUS   = TRUE
   INF LumiaFamilyPkg/Driver/SmBiosTableDxe/SmBiosTableDxe.inf
 
   # ACPI Tables
-  !include Lumia650Pkg/Include/ACPI.inc
+  # !include Lumia650Pkg/Include/ACPI.inc
 
   INF MdeModulePkg/Universal/EsrtFmpDxe/EsrtFmpDxe.inf
 

@@ -7,6 +7,7 @@
 
 # Export AArch64 Tools prefix on CI
 export GCC5_AARCH64_PREFIX=/opt/gcc-linaro-7.2.1-2017.11-x86_64_aarch64-elf/bin/aarch64-elf-
+export GCC5_ARM_PREFIX=arm-linux-gnueabihf-
 # Export BUILDALL flags
 export BUILDALL=1
 
@@ -16,10 +17,10 @@ cd edk2
 
 # Start build
 echo "Start build..."
-. rundbbuild.sh --950xl --development
+. rundbbuild.sh --650 --development
 
 # Check if we have both FD ready
-if [ ! -f Build/Lumia950XL-AARCH64/DEBUG_GCC5/FV/MSM8994_EFI.fd ]; then
+if [ ! -f Build/Lumia650-ARM/DEBUG_GCC5/FV/MSM8909_EFI.fd ]; then
     echo "Unable to find build artifacts."
     exit 1
 fi

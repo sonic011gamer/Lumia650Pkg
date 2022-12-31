@@ -1,5 +1,5 @@
-#ifndef __ACPI_LUMIA950XL_PLATFORM_H__
-#define __ACPI_LUMIA950XL_PLATFORM_H__
+#ifndef __ACPI_LUMIA650_PLATFORM_H__
+#define __ACPI_LUMIA650_PLATFORM_H__
 
 #include <IndustryStandard/Acpi.h>
 #include <Library/AcpiLib.h>
@@ -20,6 +20,6 @@
 #define SCSS_SYS_POR 0x01
 #define HWIO_SCSS_RESET_ADDR 0x009020B4
 
-#define AP_CPU_COUNT 8
+#define AP_CPU_COUNT 4
 
 #endif
