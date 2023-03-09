@@ -1,18 +1,45 @@
 // ARM Platform support for bootstrapping LK
 
-	.set CTRL_M_BIT,	 (1 << 0)
-	.set CTRL_C_BIT,	 (1 << 2)
-	.set CTRL_B_BIT,	 (1 << 7)
-	.set CTRL_I_BIT,	 (1 << 12)
-	.set CACHE_LINE,		64
+	.set CTRL_M_BIT,     (1 << 0)
+	.set CTRL_C_BIT,     (1 << 2)
+	.set CTRL_B_BIT,     (1 << 7)
+	.set CTRL_I_BIT,     (1 << 12)
+	.set CACHE_LINE,	64
 
 	.section "s_ArmDeInitialize", "ax"
-
 	GCC_ASM_EXPORT (ArmDeInitialize)
-	GCC_ASM_EXPORT (ArmCleanInvalidateCacheRange)
-	GCC_ASM_EXPORT (ArmCallSmcHardCoded)
-	GCC_ASM_EXPORT (ArmReadCntFrq2)
-    
+	GCC_ASM_EXPORT (ArmRelocateFirmware)
+
+ArmRelocateFirmware:
+	// check if we're located at expected location
+	adr	r4, .
+	ldr	r5, =ArmRelocateFirmware
+	cmp	r4, r5
+	bne	_CopyUEFI
+	bx lr
+
+	_CopyUEFI:
+	// find our start address by getting our expected offset, then subtracting it from our actual address
+	ldr	r6, =FixedPcdGet64 (PcdFdBaseAddress)
+	sub	r5, r5, r6 // r5 now holds offset of _ModuleEntryPoint from start of FD base
+	sub	r4, r4, r5 // r4 now holds address of actual FD base
+	// tweak return address
+
+	//note: r14 is lr; gcc5 doesn't have the alias
+	sub	r14, r14, r4
+	add	r14, r14, r6
+	ldr	r5, =FixedPcdGet64 (PcdFdSize)
+
+	//ugly memcpy
+	_CopyLoop:
+	ldr	r2, [r4], #4
+	ldr	r3, [r4], #4
+	str	r2, [r6], #4
+	str	r3, [r6], #4
+	subs	r5, r5, #4
+	bne	_CopyLoop
+	bx lr
+
 ArmDeInitialize:
 	// Disable Branch Prediction
 	mrc     p15, 0, r0, c1, c0, 0
@@ -25,10 +52,10 @@ ArmDeInitialize:
 	cpsid   if
 	isb
 
-	// Clean, invalidate and disable data-cache
+	// CLean, invalidate and disable data-cache
 	dsb
 	mrc		p15, 1, R6, c0, c0, 1			// Read CLIDR
-	ands	R3, R6, =#7000000				// Mask out all but Level of Coherency (LoC)
+	ands	R3, R6, #0x7000000				// Mask out all but Level of Coherency (LoC)
 	mov		R3, R3, LSR #23					// Cache level value (naturally aligned)
 	beq		Finished
 	mov		R10, #0
@@ -96,40 +123,3 @@ Finished:
 
 	// Return
 	bx		lr
-
-ArmCleanInvalidateCacheRange:
-	// cache-ops.S @ lk
-	dsb
-	add 	r2, r0, r1						// Calculate the end address
-	bic 	r0, #(CACHE_LINE-1)				// Align start with cache line
-ArmCleanInvalidateCacheRange0:
-	mcr		p15, 0, r0, c7, c14, 1			// Clean & invalidate cache to PoC by MVA
-	add		r0, r0, #CACHE_LINE
-	cmp 	r0, r2
-	blo		ArmCleanInvalidateCacheRange0
-
-	mov		r0, #0
-	dsb
-
-	bx		lr
-
-ArmCallSmcHardCoded:
-    // Load the SMC arguments values into the appropriate registers
-    ldr     r7, =0
-    ldr     r6, =0
-    ldr     r5, =0
-    ldr     r4, =0
-    ldr     r3, =0x50
-    ldr     r2, =0xA0000000
-    ldr     r1, =0x12
-    ldr     r0, =0x0200010f
-    .arch_extension sec
-    smc     #0
-
-    bx      lr
-
-ArmReadCntFrq2:
-	mrc    p15, 0, r0, c14, c0, 0    // Read CNTFRQ
-	bx     lr
-
-	.end

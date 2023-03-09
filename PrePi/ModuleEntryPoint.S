@@ -18,6 +18,7 @@
 
 #define LoadConstantToReg(Data, Reg) \
     ldr Reg, =Data
+GCC_ASM_IMPORT (ArmRelocateFirmware)
 GCC_ASM_IMPORT (ArmDeInitialize)
 GCC_ASM_IMPORT (CEntryPoint)
 GCC_ASM_EXPORT (_ModuleEntryPoint)
@@ -35,7 +36,8 @@ _StackSize:
   .quad FixedPcdGet32(PcdPrePiStackSize)
 
 _ModuleEntryPoint:
-
+  /* Firmware Relocation */
+  bl ASM_PFX(ArmRelocateFirmware)
   /* World reset */
   bl ASM_PFX(ArmDeInitialize)
 
